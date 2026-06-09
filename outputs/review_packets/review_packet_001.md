@@ -1,6 +1,6 @@
-# Review Packet: Idea Brief Ready
+# Review Packet: Draft Ready
 
-Generated at: 2026-06-09 16:12:29
+Generated at: 2026-06-09 16:28:54
 
 ## Status
 
@@ -16,14 +16,15 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004
 
 ## What the Reviewer Should Decide
 
-- Approve this idea direction for blog drafting
-- Request edits to the angle, title, or outline
-- Reject the idea if it is too close to source-post copy or not useful enough for Terret's audience
+- Approve this draft for publishing
+- Request edits to the angle, title, structure, claims, or product language
+- Reject the draft if it is too close to source-post copy or not useful enough for Terret's audience
 
 ## Files Generated
 
 - Markdown idea brief: `outputs\idea_briefs\idea_brief_001.md`
 - JSON idea brief: `outputs\idea_briefs\idea_brief_001.json`
+- Blog draft: `outputs\drafts\blog_draft_001.md`
 
 ## Human Review Checklist
 
@@ -35,4 +36,4 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004
 
 ## Important Gate
 
-This packet does not publish anything. It only prepares the idea for human review before drafting.
+This packet does not publish anything. The blog draft remains blocked until a human reviewer approves it.
