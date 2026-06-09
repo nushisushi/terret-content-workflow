@@ -31,24 +31,22 @@ Populate `source_post_ids` dynamically from the approved idea brief. Do not inve
 
 Use this structure:
 
+```markdown
 ---
-
 title: "Blog title"
 slug: "url-friendly-slug"
 meta_description: "SEO-friendly meta description under 160 characters"
 author: "Terret"
 status: "draft"
 tags:
-
-* AI revenue intelligence
-* Revenue Graph
-* RevOps
-* CRO
-* answer-to-action
-  source_post_ids:
-* justin_post_001
-* justin_post_002
-
+  - AI revenue intelligence
+  - Revenue Graph
+  - RevOps
+  - CRO
+  - answer-to-action
+source_post_ids:
+  - justin_post_001
+  - justin_post_002
 ---
 
 # Blog Title
@@ -73,9 +71,10 @@ Closing section.
 
 ## Review Notes
 
-* Claims that need human review
-* Places where product wording should be checked
-* Any source-post claims that were softened
+- Claims that need human review
+- Places where product wording should be checked
+- Any source-post claims that were softened
+```
 
 ## Editorial Requirements
 
