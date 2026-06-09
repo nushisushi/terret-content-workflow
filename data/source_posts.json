@@ -1,0 +1,26 @@
+[
+{
+"id": "justin_post_001",
+"author": "Justin Shriber",
+"title_hint": "The difference between an answer and an outcome",
+"platform": "LinkedIn",
+"profile_url": "https://www.linkedin.com/in/justinshriber/",
+"post_url": "https://www.linkedin.com/posts/justinshriber_a-lot-of-revenue-teams-have-come-to-the-same-activity-7470124159961034752-GY-B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+"date_captured": "2026-06-09",
+"capture_method": "manual public capture",
+"status": "new",
+"raw_text": "A lot of revenue teams have come to the same conclusion recently.\n\nWe've got all this data. Why don't we just use an LLM to get to the root cause of what's happening in our business?\n\nI understand the instinct. But MCP server integrations actually create more problems in an enterprise than they solve.\n\nFirst, there's the matter of security.\n\nEvery underlying data system has its own access controls. When you use an LLM to bypass those controls, you're creating security holes, giving people access to information they shouldn't be able to see.\n\nSecond, there's quantitative accuracy.\n\nLLMs are notoriously bad at running calculations. Ask one what your ARR was last quarter and every time you ask, it's going to come up with a different way to calculate the number. And if it's missing context, it's just going to make it up. You get inconsistent, inaccurate numbers every time.\n\nThird, performance at scale.\n\nAsking an LLM to run across multiple systems, thread all of them together, and then reason on top of it is an incredibly inefficient approach. It won't scale in an enterprise environment.\n\nThis is exactly why we built Terret Nexus.\n\nWe sit across all of your revenue-facing systems, aggregate the information, and interface with LLMs to give you fast, accurate answers to the questions that matter. And then we operationalize those answers.\n\nThat's the difference between an answer and an outcome."
+},
+{
+"id": "justin_post_002",
+"author": "Justin Shriber",
+"title_hint": "Why CROs still cannot get to root cause",
+"platform": "LinkedIn",
+"profile_url": "https://www.linkedin.com/in/justinshriber/",
+"post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-are-still-frustrated-despite-years-activity-7469791171922546688-8I24?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+"date_captured": "2026-06-09",
+"capture_method": "manual public capture",
+"status": "new",
+"raw_text": "CROs tell me, "Justin, we've invested in every analytics platform." Now we're investing in AI. And we still can't get to the root cause of our biggest challenges.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThese aren't new questions. The difference is that now there's an expectation that AI can finally answer them.\n\nThe reason it hasn't comes down to data.\n\nNot a lack of it. There's more data in most organizations than ever before.\n\nThe problem is that it's scattered across systems that don't talk to each other like a puzzle whose pieces have been thrown all over a room.\n\nTerret Nexus puts the puzzle together."
+}
+]
