@@ -21,6 +21,32 @@
 "date_captured": "2026-06-09",
 "capture_method": "manual public capture",
 "status": "new",
-"raw_text": "CROs tell me, "Justin, we've invested in every analytics platform." Now we're investing in AI. And we still can't get to the root cause of our biggest challenges.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThese aren't new questions. The difference is that now there's an expectation that AI can finally answer them.\n\nThe reason it hasn't comes down to data.\n\nNot a lack of it. There's more data in most organizations than ever before.\n\nThe problem is that it's scattered across systems that don't talk to each other like a puzzle whose pieces have been thrown all over a room.\n\nTerret Nexus puts the puzzle together."
+"raw_text": "CROs tell me, \"Justin, we've invested in every analytics platform.\" Now we're investing in AI. And we still can't get to the root cause of our biggest challenges.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThese aren't new questions. The difference is that now there's an expectation that AI can finally answer them.\n\nThe reason it hasn't comes down to data.\n\nNot a lack of it. There's more data in most organizations than ever before.\n\nThe problem is that it's scattered across systems that don't talk to each other like a puzzle whose pieces have been thrown all over a room.\n\nTerret Nexus puts the puzzle together."
+},
+
+{
+"id": "justin_post_003",
+"author": "Justin Shriber",
+"title_hint": "Why CROs still cannot get real answers from their data",
+"platform": "LinkedIn",
+"profile_url": "https://www.linkedin.com/in/justinshriber/",
+"post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-still-cant-get-real-answers-from-activity-7463603809320087552-VthC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+"date_captured": "2026-06-09",
+"capture_method": "manual public capture",
+"status": "new",
+"raw_text": "CROs have spent the last decade investing in analytics platforms. Now AI.\n\nThey still can't answer their most basic questions.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThat's not a tools problem. The tools are fine.\n\nThe problem is that the data is like a puzzle whose pieces have been scattered all over a room.\n\nCRM over here. Call transcripts over there. Email threads, ERP data, product usage -- all in separate systems, none of them talking to each other.\n\nSo when a platform tries to answer a question, it's only working with what it can see. And what it can see is never the whole picture.\n\nThe CROs getting real answers right now didn't buy a better platform. They built a complete picture first.\n\nThat's what we do at Terret.ai."
+},
+
+{
+"id": "justin_post_004",
+"author": "Justin Shriber",
+"title_hint": "Three ways revenue orgs try to solve the data problem",
+"platform": "LinkedIn",
+"profile_url": "https://www.linkedin.com/in/justinshriber/",
+"post_url": "https://www.linkedin.com/posts/justinshriber_there-are-three-ways-revenue-orgs-try-to-activity-7462164112999874560--iK3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+"date_captured": "2026-06-09",
+"capture_method": "manual public capture",
+"status": "new",
+"raw_text": "There are three ways revenue orgs try to solve the data problem. Two of them are traps.\n\nThe first is human middleware. One person manually pulls data together every time a question comes up. It works until it doesn't, and it never scales.\n\nThe second is the revenue data lake. It takes months to build, $1M+ to maintain, and every new question means more systems work. I talked to one company spending $1.5 million a year just to keep theirs running.\n\nBoth have the same fatal flaw. Even if they deliver answers, they don't automatically lead to action. You still have to go implement whatever you found manually.\n\nThe third approach is Terret Nexus. We build a Revenue Graph in 48 hours. From there you ask your question, get an immediate answer, and our revenue agents help you implement it automatically.\n\nSee how it works at Terret.ai"
 }
 ]
