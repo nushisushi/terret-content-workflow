@@ -266,6 +266,7 @@ def render_review_packet(
     idea_brief_md_path: Path,
     idea_brief_json_path: Path,
     blog_draft_path: Path,
+    quality_check_path: Path,
 ) -> str:
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     review_notes = "\n".join(f"- {note}" for note in brief["human_review_notes"])
@@ -297,6 +298,7 @@ Ready for human marketing review.
 - Markdown idea brief: `{idea_brief_md_path.relative_to(ROOT)}`
 - JSON idea brief: `{idea_brief_json_path.relative_to(ROOT)}`
 - Blog draft: `{blog_draft_path.relative_to(ROOT)}`
+- Quality check: `{quality_check_path.relative_to(ROOT)}`
 
 ## Human Review Checklist
 
@@ -306,12 +308,11 @@ Ready for human marketing review.
 
 This packet does not publish anything. The blog draft remains blocked until a human reviewer approves it.
 """
-
-
 def render_notification_markdown(
     brief: dict[str, Any],
     blog_draft_path: Path,
     review_packet_path: Path,
+    quality_check_path: Path,
 ) -> str:
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_post_ids = ", ".join(brief["source_post_ids"])
@@ -334,6 +335,8 @@ Source posts used: {source_post_ids}
 Draft file: `{blog_draft_path.relative_to(ROOT)}`
 
 Review packet: `{review_packet_path.relative_to(ROOT)}`
+
+Quality check: `{quality_check_path.relative_to(ROOT)}`
 
 ## Why You Are Being Notified
 
@@ -359,7 +362,6 @@ Then review the draft and save one of these decisions:
 
 The publish script will remain blocked unless the saved review decision says `approved` and `publish_allowed` is `true`.
 """
-
 
 def yaml_list(items: list[str]) -> str:
     return "\n".join(f"  - {item}" for item in items)
@@ -586,14 +588,17 @@ def main() -> None:
             idea_brief_md_path,
             idea_brief_json_path,
             blog_draft_path,
+            quality_check_path,
         ),
         encoding="utf-8",
     )
+
     notification_path.write_text(
         render_notification_markdown(
             brief,
             blog_draft_path,
             review_packet_path,
+            quality_check_path,
         ),
         encoding="utf-8",
     )
