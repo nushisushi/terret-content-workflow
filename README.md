@@ -95,6 +95,24 @@ Select-String -Path site\posts\why-cros-need-more-than-an-llm-on-revenue-data.md
 
 A clean result prints nothing.
 
+## Demo Script
+
+For the live walkthrough, I would show the loop in this order:
+
+```text
+1. Open `data/source_posts.json` to show the LinkedIn source inputs.
+2. Run `python src/run_workflow.py` to generate the idea brief, draft, review packet, and reviewer notification.
+3. Open `outputs/notifications/notification_001.md` to show how the marketing reviewer is alerted.
+4. Open `outputs/drafts/blog_draft_001.md` and `outputs/review_packets/review_packet_001.md` to show the draft and review context.
+5. Run `python -m streamlit run src/review_app.py` and save an approve/request-edits/reject decision.
+6. Open `outputs/review_decisions/review_decision_001.json` to show the approval state.
+7. Run `python src/publish.py` to show that publishing only works after approval.
+8. Open `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the final structured published output.
+```
+
+The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through notification, human review, saved approval state, and a publish gate before it becomes public output.
+
+
 ## Source Data and Context
 
 Source posts are stored in:
@@ -164,7 +182,7 @@ The main guardrail is the publish step. `src/publish.py` does not publish just b
 
 ## What Still Breaks
 
-This is still a local prototype. It does not call a live LLM API, send a real Slack or email notification, authenticate reviewers, connect to a real CMS, or handle multiple content batches.
+This is still a local prototype. It does not call a live LLM API, deliver notifications through Slack/email/webhook, authenticate reviewers, connect to a real CMS, or handle multiple content batches.
 
 Review state is stored in a JSON file, so rerunning the review app can overwrite the previous decision. Source posts are added by hand. The SEO/AEO/GEO fields are formatted but not checked against an external SEO tool. The final output is Markdown in `site/posts/`, not a deployed website.
 
@@ -172,15 +190,8 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The notification step is now modeled locally with:
+The next improvements would be wiring the quality-check prompt into an actual generated quality report, adding tests for blocked publishing, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, and publishing to a deployed static site or real CMS.
 
-```text
-outputs/notifications/notification_001.md
-```
-
-This file is generated when a draft is ready for review. It gives the reviewer the draft title, source post IDs, draft path, review packet path, checklist, and instructions for opening the Streamlit review app. In a production version, the same content could be sent through Slack, email, or a webhook.
-
-The next improvements would be a quality-check stage before human review, tests for blocked publishing, support for multiple batches, reviewer authentication, a real Slack/email integration, and eventually a CMS or deployed static-site target.
 
 ## Project Structure
 
