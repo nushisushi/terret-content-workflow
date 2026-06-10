@@ -16,6 +16,7 @@ BLOG_GENERATION_PROMPT_PATH = ROOT / "prompts" / "blog_generation_prompt.md"
 IDEA_BRIEF_DIR = ROOT / "outputs" / "idea_briefs"
 DRAFT_DIR = ROOT / "outputs" / "drafts"
 REVIEW_PACKET_DIR = ROOT / "outputs" / "review_packets"
+NOTIFICATION_DIR = ROOT / "outputs" / "notifications"
 
 
 def read_text(path: Path) -> str:
@@ -259,7 +260,6 @@ Suggested meta description: {brief["seo_aeo_geo_notes"]["suggested_meta_descript
 {brief["recommended_next_stage"]}
 """
 
-
 def render_review_packet(
     brief: dict[str, Any],
     idea_brief_md_path: Path,
@@ -307,9 +307,61 @@ This packet does not publish anything. The blog draft remains blocked until a hu
 """
 
 
+def render_notification_markdown(
+    brief: dict[str, Any],
+    blog_draft_path: Path,
+    review_packet_path: Path,
+) -> str:
+    generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    source_post_ids = ", ".join(brief["source_post_ids"])
+    review_notes = "\n".join(f"- {note}" for note in brief["human_review_notes"])
+
+    return f"""# Notification: Blog Draft Ready for Review
+
+Generated at: {generated_at}
+
+Hi Marketing Reviewer,
+
+A new Terret blog draft is ready for review.
+
+## Draft
+
+Title: {brief["working_title"]}
+
+Source posts used: {source_post_ids}
+
+Draft file: `{blog_draft_path.relative_to(ROOT)}`
+
+Review packet: `{review_packet_path.relative_to(ROOT)}`
+
+## Why You Are Being Notified
+
+This draft has been generated, but it is not eligible for publishing yet. A human reviewer must approve, request edits, or reject it before the publish script can run successfully.
+
+## Reviewer Checklist
+
+{review_notes}
+
+## Suggested Next Action
+
+Open the review app by running:
+
+    python -m streamlit run src/review_app.py
+
+Then review the draft and save one of these decisions:
+
+- Approve for publishing
+- Request edits
+- Reject draft
+
+## Publishing Gate
+
+The publish script will remain blocked unless the saved review decision says `approved` and `publish_allowed` is `true`.
+"""
+
+
 def yaml_list(items: list[str]) -> str:
     return "\n".join(f"  - {item}" for item in items)
-
 
 def render_blog_draft(brief: dict[str, Any]) -> str:
     title = brief["working_title"]
@@ -428,6 +480,7 @@ def main() -> None:
     IDEA_BRIEF_DIR.mkdir(parents=True, exist_ok=True)
     DRAFT_DIR.mkdir(parents=True, exist_ok=True)
     REVIEW_PACKET_DIR.mkdir(parents=True, exist_ok=True)
+    NOTIFICATION_DIR.mkdir(parents=True, exist_ok=True)
 
     posts = load_source_posts(SOURCE_POSTS_PATH)
     terret_context = read_text(TERRET_CONTEXT_PATH)
@@ -449,6 +502,7 @@ def main() -> None:
     idea_brief_md_path = IDEA_BRIEF_DIR / "idea_brief_001.md"
     blog_draft_path = DRAFT_DIR / "blog_draft_001.md"
     review_packet_path = REVIEW_PACKET_DIR / "review_packet_001.md"
+    notification_path = NOTIFICATION_DIR / "notification_001.md"
 
     idea_brief_json_path.write_text(
         json.dumps(brief, indent=2, ensure_ascii=False),
@@ -471,6 +525,14 @@ def main() -> None:
         ),
         encoding="utf-8",
     )
+    notification_path.write_text(
+        render_notification_markdown(
+            brief,
+            blog_draft_path,
+            review_packet_path,
+        ),
+        encoding="utf-8",
+    )
 
     print("Stage 1 complete: idea brief generated.")
     print(f"- {idea_brief_json_path.relative_to(ROOT)}")
@@ -481,6 +543,9 @@ def main() -> None:
     print()
     print("Review packet updated.")
     print(f"- {review_packet_path.relative_to(ROOT)}")
+    print()
+    print("Marketing reviewer notification generated.")
+    print(f"- {notification_path.relative_to(ROOT)}")
     print()
     print("Next gate: human review before publishing.")
 
