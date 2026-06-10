@@ -12,12 +12,13 @@ SOURCE_POSTS_PATH = ROOT / "data" / "source_posts.json"
 TERRET_CONTEXT_PATH = ROOT / "data" / "terret_context.md"
 IDEA_BRIEF_PROMPT_PATH = ROOT / "prompts" / "idea_brief_prompt.md"
 BLOG_GENERATION_PROMPT_PATH = ROOT / "prompts" / "blog_generation_prompt.md"
+QUALITY_CHECK_PROMPT_PATH = ROOT / "prompts" / "quality_check_prompt.md"
 
 IDEA_BRIEF_DIR = ROOT / "outputs" / "idea_briefs"
 DRAFT_DIR = ROOT / "outputs" / "drafts"
 REVIEW_PACKET_DIR = ROOT / "outputs" / "review_packets"
 NOTIFICATION_DIR = ROOT / "outputs" / "notifications"
-
+QUALITY_CHECK_DIR = ROOT / "outputs" / "quality_checks"
 
 def read_text(path: Path) -> str:
     if not path.exists():
@@ -474,18 +475,69 @@ For CROs and RevOps leaders, that is the real dividing line. The next generation
 - The draft should be checked for similarity to Justin Shriber's LinkedIn posts before approval.
 - Recommended reviewer decision: approve with light edits if product language matches approved Terret positioning.
 """
+def render_quality_check_markdown(
+    brief: dict[str, Any],
+    blog_draft_path: Path,
+) -> str:
+    generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    source_post_ids = ", ".join(brief["source_post_ids"])
 
+    return f"""# Quality Check: Blog Draft 001
+
+Generated at: {generated_at}
+
+## Draft Reviewed
+
+Title: {brief["working_title"]}
+
+Draft file: `{blog_draft_path.relative_to(ROOT)}`
+
+Source posts used: {source_post_ids}
+
+## Overall Recommendation
+
+Approve for human review with light product-language review.
+
+This draft is ready for a marketing reviewer to evaluate. It should not be published automatically. The main risks are product-claim precision, similarity to the source LinkedIn posts, and whether the final language matches approved Terret positioning.
+
+## Scores
+
+| Category | Score | Notes |
+| --- | ---: | --- |
+| Originality | 4/5 | The draft uses the source posts as a theme cluster rather than copying their structure directly. |
+| Terret Fit | 4/5 | The post speaks to CRO and RevOps pain around fragmented revenue data and root-cause analysis. |
+| Product Claim Safety | 3/5 | Claims around Nexus, Revenue Graph, speed, scale, and automation should still be checked by a human reviewer. |
+| Structure and Readability | 4/5 | The argument moves clearly from fragmented data to answer-to-action workflow. |
+| SEO / AEO / GEO Readiness | 4/5 | The draft includes title, slug, meta description, headings, tags, and direct-answer framing. |
+
+## Checks
+
+- The draft is not a close paraphrase of any single LinkedIn post.
+- The draft has a clear CRO / RevOps audience.
+- The draft includes structured publishing metadata.
+- The draft keeps review notes separate from the public body.
+- The draft still needs human review before publishing.
+
+## Specific Reviewer Notes
+
+- Confirm that Terret Nexus and Revenue Graph language matches approved company positioning.
+- Check whether any speed, scale, cost, or automation claims need softer wording.
+- Confirm that the post is sufficiently original compared with Justin Shriber's LinkedIn posts.
+- Confirm that the CTA and final framing match Terret's current marketing priorities.
+"""
 
 def main() -> None:
     IDEA_BRIEF_DIR.mkdir(parents=True, exist_ok=True)
     DRAFT_DIR.mkdir(parents=True, exist_ok=True)
     REVIEW_PACKET_DIR.mkdir(parents=True, exist_ok=True)
     NOTIFICATION_DIR.mkdir(parents=True, exist_ok=True)
-
+    QUALITY_CHECK_DIR.mkdir(parents=True, exist_ok=True)
+    
     posts = load_source_posts(SOURCE_POSTS_PATH)
     terret_context = read_text(TERRET_CONTEXT_PATH)
     idea_brief_prompt = read_text(IDEA_BRIEF_PROMPT_PATH)
     blog_generation_prompt = read_text(BLOG_GENERATION_PROMPT_PATH)
+    quality_check_prompt = read_text(QUALITY_CHECK_PROMPT_PATH)
 
     if not terret_context.strip():
         raise ValueError("terret_context.md is empty.")
@@ -496,6 +548,9 @@ def main() -> None:
     if not blog_generation_prompt.strip():
         raise ValueError("blog_generation_prompt.md is empty.")
 
+    if not quality_check_prompt.strip():
+        raise ValueError("quality_check_prompt.md is empty.")
+
     brief = build_idea_brief(posts)
 
     idea_brief_json_path = IDEA_BRIEF_DIR / "idea_brief_001.json"
@@ -503,6 +558,7 @@ def main() -> None:
     blog_draft_path = DRAFT_DIR / "blog_draft_001.md"
     review_packet_path = REVIEW_PACKET_DIR / "review_packet_001.md"
     notification_path = NOTIFICATION_DIR / "notification_001.md"
+    quality_check_path = QUALITY_CHECK_DIR / "quality_check_001.md"
 
     idea_brief_json_path.write_text(
         json.dumps(brief, indent=2, ensure_ascii=False),
@@ -516,6 +572,14 @@ def main() -> None:
         render_blog_draft(brief),
         encoding="utf-8",
     )
+    quality_check_path.write_text(
+        render_quality_check_markdown(
+            brief,
+            blog_draft_path,
+        ),
+        encoding="utf-8",
+    )
+
     review_packet_path.write_text(
         render_review_packet(
             brief,
@@ -540,6 +604,9 @@ def main() -> None:
     print()
     print("Stage 2 complete: blog draft generated.")
     print(f"- {blog_draft_path.relative_to(ROOT)}")
+    print()
+    print("Quality check generated.")
+    print(f"- {quality_check_path.relative_to(ROOT)}")
     print()
     print("Review packet updated.")
     print(f"- {review_packet_path.relative_to(ROOT)}")

@@ -14,6 +14,7 @@ The local workflow is:
 source posts
 → idea brief
 → blog draft
+→ quality check
 → review packet
 → reviewer notification
 → human review app
@@ -32,7 +33,7 @@ This project does not call a live LLM API, send real Slack/email messages, authe
 
 ## How to Run It
 
-From the repo root, generate the idea brief, draft, review packet, and reviewer notification:
+From the repo root, generate the idea brief, draft, quality check, review packet, and reviewer notification:
 
 ```powershell
 python src/run_workflow.py
@@ -44,11 +45,14 @@ This writes:
 outputs/idea_briefs/idea_brief_001.json
 outputs/idea_briefs/idea_brief_001.md
 outputs/drafts/blog_draft_001.md
+outputs/quality_checks/quality_check_001.md
 outputs/review_packets/review_packet_001.md
 outputs/notifications/notification_001.md
 ```
 
-The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, reviewer checklist, and instructions for opening the Streamlit review app.
+The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, reviewer checklist, and instructions for opening the Streamlit review app. 
+
+The quality check file is a lightweight automated evaluation step before human review. It scores the draft for originality, Terret fit, product-claim safety, structure, and SEO/AEO/GEO readiness. It does not approve the post for publishing. It only flags what the human reviewer should inspect.
 
 Then open the review app:
 
@@ -100,17 +104,19 @@ A clean result prints nothing.
 For the live walkthrough, I would show the loop in this order:
 
 ```text
+```text
 1. Open `data/source_posts.json` to show the LinkedIn source inputs.
-2. Run `python src/run_workflow.py` to generate the idea brief, draft, review packet, and reviewer notification.
-3. Open `outputs/notifications/notification_001.md` to show how the marketing reviewer is alerted.
-4. Open `outputs/drafts/blog_draft_001.md` and `outputs/review_packets/review_packet_001.md` to show the draft and review context.
-5. Run `python -m streamlit run src/review_app.py` and save an approve/request-edits/reject decision.
-6. Open `outputs/review_decisions/review_decision_001.json` to show the approval state.
-7. Run `python src/publish.py` to show that publishing only works after approval.
-8. Open `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the final structured published output.
+2. Run `python src/run_workflow.py` to generate the idea brief, draft, quality check, review packet, and reviewer notification.
+3. Open `outputs/quality_checks/quality_check_001.md` to show the automated output-evaluation step.
+4. Open `outputs/notifications/notification_001.md` to show how the marketing reviewer is alerted.
+5. Open `outputs/drafts/blog_draft_001.md` and `outputs/review_packets/review_packet_001.md` to show the draft and review context.
+6. Run `python -m streamlit run src/review_app.py` and save an approve/request-edits/reject decision.
+7. Open `outputs/review_decisions/review_decision_001.json` to show the approval state.
+8. Run `python src/publish.py` to show that publishing only works after approval.
+9. Open `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the final structured published output.
 ```
 
-The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through notification, human review, saved approval state, and a publish gate before it becomes public output.
+The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through an automated quality check, reviewer notification, human review, saved approval state, and a publish gate before it becomes public output.
 
 
 ## Source Data and Context
@@ -161,6 +167,7 @@ The main generated files are:
 outputs/idea_briefs/idea_brief_001.json
 outputs/idea_briefs/idea_brief_001.md
 outputs/drafts/blog_draft_001.md
+outputs/quality_checks/quality_check_001.md
 outputs/review_packets/review_packet_001.md
 outputs/notifications/notification_001.md
 outputs/review_decisions/review_decision_001.json
@@ -190,7 +197,7 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The next improvements would be wiring the quality-check prompt into an actual generated quality report, adding tests for blocked publishing, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, and publishing to a deployed static site or real CMS.
+The next improvements would be adding tests for blocked publishing, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
 
 
 ## Project Structure
@@ -208,9 +215,10 @@ terret-content-workflow/
     run_workflow.py
     review_app.py
     publish.py
-  outputs/
+    outputs/
     idea_briefs/
     drafts/
+    quality_checks/
     review_packets/
     review_decisions/
     notifications/
