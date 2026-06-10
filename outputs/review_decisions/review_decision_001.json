@@ -1,0 +1,13 @@
+{
+  "draft_id": "blog_draft_001",
+  "draft_path": "outputs\\drafts\\blog_draft_001.md",
+  "idea_brief_path": "outputs\\idea_briefs\\idea_brief_001.json",
+  "title": "Why CROs Need More Than an LLM on Top of Their Revenue Data",
+  "slug": "why-cros-need-more-than-an-llm-on-revenue-data",
+  "decision": "approved",
+  "publish_allowed": true,
+  "reviewer": "Demo Marketing Reviewer",
+  "comments": "Approved for demo publish. Product wording, Terret Nexus positioning, and careful-claims notes should still be reviewed before any real external publication.",
+  "reviewed_at_utc": "2026-06-10T19:06:39.344083+00:00",
+  "important_gate": "Publishing is allowed only when decision is approved. Request-edits and rejected decisions must block publishing."
+}
