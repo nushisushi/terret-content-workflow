@@ -50,7 +50,8 @@ outputs/review_packets/review_packet_001.md
 outputs/notifications/notification_001.md
 ```
 
-The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, reviewer checklist, and instructions for opening the Streamlit review app. 
+The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, quality check path, reviewer checklist, and instructions for opening the Streamlit review app.
+
 
 The quality check file is a lightweight automated evaluation step before human review. It scores the draft for originality, Terret fit, product-claim safety, structure, and SEO/AEO/GEO readiness. It does not approve the post for publishing. It only flags what the human reviewer should inspect.
 
@@ -157,6 +158,8 @@ A draft existing on disk is not enough to publish. `src/publish.py` reads the sa
 
 Before writing the public post, the script also validates the draft metadata and removes the internal review notes from the body.
 
+I also included `outputs/test_runs/blocked_publish_proof.md` to document the negative path: if the review decision is rejected, request-edits, missing, or does not set `publish_allowed` to true, publishing is blocked.
+
 ## Current Artifacts
 
 The main generated files are:
@@ -171,6 +174,8 @@ outputs/notifications/notification_001.md
 outputs/review_decisions/review_decision_001.json
 outputs/published/blog_post_001.md
 site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md
+outputs/test_runs/blocked_publish_proof.md
+outputs/test_runs/blocked_publish_output.txt
 ```
 
 The core argument of the example post is that CROs do not need another interface for incomplete revenue data. They need a governed system that connects the full revenue picture, produces reliable root-cause analysis, and turns answers into operational action.
@@ -195,7 +200,8 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The next improvements would be adding tests for blocked publishing, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
+The next improvements would be turning the blocked-publish proof into an automated test or CI check, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
+
 
 
 ## Project Structure
@@ -221,6 +227,7 @@ terret-content-workflow/
     review_decisions/
     notifications/
     published/
+    test_runs/
   site/
     posts/
   README.md
