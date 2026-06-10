@@ -1,12 +1,12 @@
 # Quality Check: Blog Draft 001
 
-Generated at: 2026-06-10 16:31:15
+Generated at: 2026-06-10 16:56:14
 
 ## Draft Reviewed
 
 Title: Why CROs Need More Than an LLM on Top of Their Revenue Data
 
-Draft file: `outputs\drafts\blog_draft_001.md`
+Draft file: `outputs/drafts/blog_draft_001.md`
 
 Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004
 

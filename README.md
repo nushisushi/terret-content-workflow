@@ -1,10 +1,8 @@
 # Terret Agentic Content Workflow
 
-Prototype for the Terret Agentic Workflow Intern take-home project.
+This is my prototype for the Terret Agentic Workflow Intern take-home project. I built this as a small local version of the content workflow Terret described: take public posts from Justin Shriber, turn them into a Terret-style blog draft, require a human reviewer to approve or reject it, and only then allow it to publish.
 
-I built this as a small local version of the content workflow Terret described: take public posts from Justin Shriber, turn them into a Terret-style blog draft, make a human reviewer approve or reject it, and only then allow it to publish.
-
-I kept the system file-based on purpose. Instead of spending most of the time wiring up external services, I wanted to show the core workflow clearly: source data comes in, the system creates an idea brief and draft, a reviewer checks the draft in a Streamlit app, the review decision is saved as JSON, and the publish script checks that decision before writing the final post.
+I kept the system local and file-based on purpose. Instead of spending most of the time wiring up external services, I wanted the core loop to be easy to inspect: source posts come in, the system creates an idea brief and draft, a reviewer checks the work in Streamlit, the review decision is saved, and the publish script refuses to write the final post unless that decision says it is approved.
 
 ## What It Does
 
@@ -29,7 +27,8 @@ The current live example is a blog post titled:
 Why CROs Need More Than an LLM on Top of Their Revenue Data
 ```
 
-This project does not call a live LLM API, send real Slack/email messages, authenticate reviewers, or publish to a real CMS yet. The goal here was to show the workflow shape, the handoff between artifacts, and the human approval gate. For the local prototype, the notification step is modeled as a generated Markdown file that contains the same information I would send through Slack, email, or a webhook in production.
+This project does not call a live LLM API, authenticate reviewers, or publish to a real CMS yet. I focused on proving the parts that matter most for the assignment: the content pipeline, the reviewer handoff, and the approval gate. For notification, the local version always writes a reviewer-ready Markdown message and can also send that same message through a webhook when `NOTIFICATION_WEBHOOK_URL` is configured.
+
 
 ## How to Run It
 
@@ -50,10 +49,19 @@ outputs/review_packets/review_packet_001.md
 outputs/notifications/notification_001.md
 ```
 
-The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, quality check path, reviewer checklist, and instructions for opening the Streamlit review app.
+The notification step has two modes. In the local demo, it writes a Markdown message that gives the reviewer everything they need: the draft title, source post IDs, draft path, review packet path, quality check path, checklist, and next step. If `NOTIFICATION_WEBHOOK_URL` is configured, `src/run_workflow.py` also tries to send that message through a webhook, such as Slack or another automation endpoint. The file is still saved either way, so the handoff can be inspected even if delivery is skipped or fails.
 
 
-The quality check file is a lightweight automated evaluation step before human review. It scores the draft for originality, Terret fit, product-claim safety, structure, and SEO/AEO/GEO readiness. It does not approve the post for publishing. It only flags what the human reviewer should inspect.
+Optional webhook configuration is documented in `.env.example`:
+
+```text
+NOTIFICATION_WEBHOOK_URL=
+```
+
+Leave it blank for the local demo. Set it only when testing delivery to a real webhook endpoint.
+
+
+The quality check file is a lightweight pre-review checklist. It scores the draft for originality, Terret fit, product-claim safety, structure, and SEO/AEO/GEO readiness. It does not approve the post for publishing. It only flags what the human reviewer should inspect.
 
 Then open the review app:
 
@@ -107,8 +115,8 @@ For the live walkthrough, I would show the loop in this order:
 ```text
 1. Open `data/source_posts.json` to show the LinkedIn source inputs.
 2. Run `python src/run_workflow.py` to generate the idea brief, draft, quality check, review packet, and reviewer notification.
-3. Open `outputs/quality_checks/quality_check_001.md` to show the automated output-evaluation step.
-4. Open `outputs/notifications/notification_001.md` to show how the marketing reviewer is alerted.
+3. Open `outputs/quality_checks/quality_check_001.md` to show the pre-review quality check.
+4. Open `outputs/notifications/notification_001.md` and point out that `src/run_workflow.py` also attempts optional webhook delivery when `NOTIFICATION_WEBHOOK_URL` is configured.
 5. Open `outputs/drafts/blog_draft_001.md` and `outputs/review_packets/review_packet_001.md` to show the draft and review context.
 6. Run `python -m streamlit run src/review_app.py` and save an approve/request-edits/reject decision.
 7. Open `outputs/review_decisions/review_decision_001.json` to show the approval state.
@@ -148,7 +156,8 @@ prompts/blog_generation_prompt.md
 prompts/quality_check_prompt.md
 ```
 
-The current workflow uses deterministic Python logic so the pipeline is stable and easy to inspect. The prompt files show where a live Gemini or OpenAI call would fit later.
+The current workflow uses deterministic Python generation logic so the demo is stable and the outputs are easy to inspect. The prompt files show where a live Gemini or OpenAI call would fit later.
+
 
 ## Human Review Gate
 
@@ -192,7 +201,7 @@ The main guardrail is the publish step. `src/publish.py` does not publish just b
 
 ## What Still Breaks
 
-This is still a local prototype. It does not call a live LLM API, deliver notifications through Slack/email/webhook, authenticate reviewers, connect to a real CMS, or handle multiple content batches.
+This is still a local prototype. It does not call a live LLM API, authenticate reviewers, connect to a real CMS, or handle multiple content batches. Webhook delivery depends on a configured `.env` value. This prototype does not include production-grade Slack/email authentication, retry queues, delivery logs, or alert monitoring.
 
 Review state is stored in a JSON file, so rerunning the review app can overwrite the previous decision. Source posts are added by hand. The SEO/AEO/GEO fields are formatted but not checked against an external SEO tool. The final output is Markdown in `site/posts/`, not a deployed website.
 
@@ -200,8 +209,7 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The next improvements would be turning the blocked-publish proof into an automated test or CI check, supporting multiple content batches, adding reviewer authentication, sending the reviewer notification through Slack/email/webhook, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
-
+The next improvements would be turning the blocked-publish proof into an automated test, supporting multiple content batches, adding reviewer authentication, hardening webhook notification delivery with retries and delivery logs, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
 
 
 ## Project Structure
@@ -219,6 +227,7 @@ terret-content-workflow/
     run_workflow.py
     review_app.py
     publish.py
+    send_notification.py
   outputs/
     idea_briefs/
     drafts/
@@ -230,6 +239,7 @@ terret-content-workflow/
     test_runs/
   site/
     posts/
+  .env.example
   README.md
   requirements.txt
 ```

@@ -5,6 +5,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from send_notification import send_notification
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,6 +21,11 @@ DRAFT_DIR = ROOT / "outputs" / "drafts"
 REVIEW_PACKET_DIR = ROOT / "outputs" / "review_packets"
 NOTIFICATION_DIR = ROOT / "outputs" / "notifications"
 QUALITY_CHECK_DIR = ROOT / "outputs" / "quality_checks"
+
+
+def rel_path(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
 
 def read_text(path: Path) -> str:
     if not path.exists():
@@ -261,6 +268,7 @@ Suggested meta description: {brief["seo_aeo_geo_notes"]["suggested_meta_descript
 {brief["recommended_next_stage"]}
 """
 
+
 def render_review_packet(
     brief: dict[str, Any],
     idea_brief_md_path: Path,
@@ -295,10 +303,10 @@ Ready for human marketing review.
 
 ## Files Generated
 
-- Markdown idea brief: `{idea_brief_md_path.relative_to(ROOT)}`
-- JSON idea brief: `{idea_brief_json_path.relative_to(ROOT)}`
-- Blog draft: `{blog_draft_path.relative_to(ROOT)}`
-- Quality check: `{quality_check_path.relative_to(ROOT)}`
+- Markdown idea brief: `{rel_path(idea_brief_md_path)}`
+- JSON idea brief: `{rel_path(idea_brief_json_path)}`
+- Blog draft: `{rel_path(blog_draft_path)}`
+- Quality check: `{rel_path(quality_check_path)}`
 
 ## Human Review Checklist
 
@@ -308,6 +316,8 @@ Ready for human marketing review.
 
 This packet does not publish anything. The blog draft remains blocked until a human reviewer approves it.
 """
+
+
 def render_notification_markdown(
     brief: dict[str, Any],
     blog_draft_path: Path,
@@ -332,11 +342,11 @@ Title: {brief["working_title"]}
 
 Source posts used: {source_post_ids}
 
-Draft file: `{blog_draft_path.relative_to(ROOT)}`
+Draft file: `{rel_path(blog_draft_path)}`
 
-Review packet: `{review_packet_path.relative_to(ROOT)}`
+Review packet: `{rel_path(review_packet_path)}`
 
-Quality check: `{quality_check_path.relative_to(ROOT)}`
+Quality check: `{rel_path(quality_check_path)}`
 
 ## Why You Are Being Notified
 
@@ -363,8 +373,10 @@ Then review the draft and save one of these decisions:
 The publish script will remain blocked unless the saved review decision says `approved` and `publish_allowed` is `true`.
 """
 
+
 def yaml_list(items: list[str]) -> str:
     return "\n".join(f"  - {item}" for item in items)
+
 
 def render_blog_draft(brief: dict[str, Any]) -> str:
     title = brief["working_title"]
@@ -477,6 +489,8 @@ For CROs and RevOps leaders, that is the real dividing line. The next generation
 - The draft should be checked for similarity to Justin Shriber's LinkedIn posts before approval.
 - Recommended reviewer decision: approve with light edits if product language matches approved Terret positioning.
 """
+
+
 def render_quality_check_markdown(
     brief: dict[str, Any],
     blog_draft_path: Path,
@@ -492,7 +506,7 @@ Generated at: {generated_at}
 
 Title: {brief["working_title"]}
 
-Draft file: `{blog_draft_path.relative_to(ROOT)}`
+Draft file: `{rel_path(blog_draft_path)}`
 
 Source posts used: {source_post_ids}
 
@@ -528,13 +542,14 @@ This draft is ready for a marketing reviewer to evaluate. It should not be publi
 - Confirm that the CTA and final framing match Terret's current marketing priorities.
 """
 
+
 def main() -> None:
     IDEA_BRIEF_DIR.mkdir(parents=True, exist_ok=True)
     DRAFT_DIR.mkdir(parents=True, exist_ok=True)
     REVIEW_PACKET_DIR.mkdir(parents=True, exist_ok=True)
     NOTIFICATION_DIR.mkdir(parents=True, exist_ok=True)
     QUALITY_CHECK_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     posts = load_source_posts(SOURCE_POSTS_PATH)
     terret_context = read_text(TERRET_CONTEXT_PATH)
     idea_brief_prompt = read_text(IDEA_BRIEF_PROMPT_PATH)
@@ -603,23 +618,32 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    notification_delivered = send_notification(notification_path)
+
     print("Stage 1 complete: idea brief generated.")
-    print(f"- {idea_brief_json_path.relative_to(ROOT)}")
-    print(f"- {idea_brief_md_path.relative_to(ROOT)}")
+    print(f"- {rel_path(idea_brief_json_path)}")
+    print(f"- {rel_path(idea_brief_md_path)}")
     print()
     print("Stage 2 complete: blog draft generated.")
-    print(f"- {blog_draft_path.relative_to(ROOT)}")
+    print(f"- {rel_path(blog_draft_path)}")
     print()
     print("Quality check generated.")
-    print(f"- {quality_check_path.relative_to(ROOT)}")
+    print(f"- {rel_path(quality_check_path)}")
     print()
     print("Review packet updated.")
-    print(f"- {review_packet_path.relative_to(ROOT)}")
+    print(f"- {rel_path(review_packet_path)}")
     print()
     print("Marketing reviewer notification generated.")
-    print(f"- {notification_path.relative_to(ROOT)}")
+    print(f"- {rel_path(notification_path)}")
+
+    if notification_delivered:
+        print("Webhook delivery status: delivered.")
+    else:
+        print("Webhook delivery status: skipped or failed; artifact fallback is available.")
+
     print()
     print("Next gate: human review before publishing.")
+
 
 if __name__ == "__main__":
     main()

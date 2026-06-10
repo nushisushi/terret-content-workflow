@@ -1,6 +1,6 @@
 # Review Packet: Draft Ready
 
-Generated at: 2026-06-10 16:31:15
+Generated at: 2026-06-10 16:56:14
 
 ## Status
 
@@ -22,10 +22,10 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004
 
 ## Files Generated
 
-- Markdown idea brief: `outputs\idea_briefs\idea_brief_001.md`
-- JSON idea brief: `outputs\idea_briefs\idea_brief_001.json`
-- Blog draft: `outputs\drafts\blog_draft_001.md`
-- Quality check: `outputs\quality_checks\quality_check_001.md`
+- Markdown idea brief: `outputs/idea_briefs/idea_brief_001.md`
+- JSON idea brief: `outputs/idea_briefs/idea_brief_001.json`
+- Blog draft: `outputs/drafts/blog_draft_001.md`
+- Quality check: `outputs/quality_checks/quality_check_001.md`
 
 ## Human Review Checklist
 

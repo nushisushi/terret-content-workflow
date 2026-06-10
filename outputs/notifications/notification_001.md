@@ -1,6 +1,6 @@
 # Notification: Blog Draft Ready for Review
 
-Generated at: 2026-06-10 16:31:15
+Generated at: 2026-06-10 16:56:14
 
 Hi Marketing Reviewer,
 
@@ -12,11 +12,11 @@ Title: Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004
 
-Draft file: `outputs\drafts\blog_draft_001.md`
+Draft file: `outputs/drafts/blog_draft_001.md`
 
-Review packet: `outputs\review_packets\review_packet_001.md`
+Review packet: `outputs/review_packets/review_packet_001.md`
 
-Quality check: `outputs\quality_checks\quality_check_001.md`
+Quality check: `outputs/quality_checks/quality_check_001.md`
 
 ## Why You Are Being Notified
 
