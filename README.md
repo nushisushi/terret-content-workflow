@@ -104,7 +104,6 @@ A clean result prints nothing.
 For the live walkthrough, I would show the loop in this order:
 
 ```text
-```text
 1. Open `data/source_posts.json` to show the LinkedIn source inputs.
 2. Run `python src/run_workflow.py` to generate the idea brief, draft, quality check, review packet, and reviewer notification.
 3. Open `outputs/quality_checks/quality_check_001.md` to show the automated output-evaluation step.
@@ -117,7 +116,6 @@ For the live walkthrough, I would show the loop in this order:
 ```
 
 The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through an automated quality check, reviewer notification, human review, saved approval state, and a publish gate before it becomes public output.
-
 
 ## Source Data and Context
 
@@ -215,7 +213,7 @@ terret-content-workflow/
     run_workflow.py
     review_app.py
     publish.py
-    outputs/
+  outputs/
     idea_briefs/
     drafts/
     quality_checks/
