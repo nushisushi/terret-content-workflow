@@ -15,6 +15,7 @@ source posts
 → idea brief
 → blog draft
 → review packet
+→ reviewer notification
 → human review app
 → review decision JSON
 → approval-gated publish script
@@ -27,11 +28,11 @@ The current live example is a blog post titled:
 Why CROs Need More Than an LLM on Top of Their Revenue Data
 ```
 
-This project does not call a live LLM API, send real Slack/email notifications, authenticate reviewers, or publish to a real CMS yet. The goal here was to show the workflow shape, the handoff between artifacts, and the human approval gate.
+This project does not call a live LLM API, send real Slack/email messages, authenticate reviewers, or publish to a real CMS yet. The goal here was to show the workflow shape, the handoff between artifacts, and the human approval gate. For the local prototype, the notification step is modeled as a generated Markdown file that contains the same information I would send through Slack, email, or a webhook in production.
 
 ## How to Run It
 
-From the repo root, generate the idea brief, draft, and review packet:
+From the repo root, generate the idea brief, draft, review packet, and reviewer notification:
 
 ```powershell
 python src/run_workflow.py
@@ -44,7 +45,10 @@ outputs/idea_briefs/idea_brief_001.json
 outputs/idea_briefs/idea_brief_001.md
 outputs/drafts/blog_draft_001.md
 outputs/review_packets/review_packet_001.md
+outputs/notifications/notification_001.md
 ```
+
+The notification file tells the reviewer that a draft is ready. It includes the draft title, source post IDs, draft path, review packet path, reviewer checklist, and instructions for opening the Streamlit review app.
 
 Then open the review app:
 
@@ -140,6 +144,7 @@ outputs/idea_briefs/idea_brief_001.json
 outputs/idea_briefs/idea_brief_001.md
 outputs/drafts/blog_draft_001.md
 outputs/review_packets/review_packet_001.md
+outputs/notifications/notification_001.md
 outputs/review_decisions/review_decision_001.json
 outputs/published/blog_post_001.md
 site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md
@@ -167,9 +172,15 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The next thing I would add is a lightweight notification artifact when a draft is ready for review, probably `outputs/notifications/notification_001.md`. That would model the “marketing colleague gets notified” step without spending time on Slack setup.
+The notification step is now modeled locally with:
 
-After that, I would add a quality-check stage before human review, tests for blocked publishing, support for multiple batches, reviewer authentication, a real Slack/email integration, and eventually a CMS or deployed static-site target.
+```text
+outputs/notifications/notification_001.md
+```
+
+This file is generated when a draft is ready for review. It gives the reviewer the draft title, source post IDs, draft path, review packet path, checklist, and instructions for opening the Streamlit review app. In a production version, the same content could be sent through Slack, email, or a webhook.
+
+The next improvements would be a quality-check stage before human review, tests for blocked publishing, support for multiple batches, reviewer authentication, a real Slack/email integration, and eventually a CMS or deployed static-site target.
 
 ## Project Structure
 
@@ -191,6 +202,7 @@ terret-content-workflow/
     drafts/
     review_packets/
     review_decisions/
+    notifications/
     published/
   site/
     posts/
