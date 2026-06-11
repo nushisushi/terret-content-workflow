@@ -67,11 +67,11 @@ I think of the workflow in four layers:
 * **Human control layer:** reviewer notification, review packet, Streamlit decision app, and saved approval state
 * **Activation layer:** publish script that only writes the public Markdown post after approval
 
-
 ## Live Example
 
 ```text
 Why CROs Need More Than an LLM on Top of Their Revenue Data
+```
 
 My main goal was to show how the control layer works in a content workflow.
 
