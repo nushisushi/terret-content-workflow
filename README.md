@@ -112,6 +112,20 @@ Select-String -Path site\posts\why-cros-need-more-than-an-llm-on-revenue-data.md
 
 A clean result prints nothing.
 
+## Demo Script
+
+In the walkthrough, I would show the workflow in this order:
+
+1. `data/source_posts.json` to show the captured public LinkedIn inputs, source URLs, and capture metadata.
+2. `outputs/source_maps/source_evidence_map_001.md` to show how source themes are made reviewable.
+3. `outputs/idea_briefs/idea_brief_001.md` and `outputs/drafts/blog_draft_001.md` to show the synthesis and draft artifacts.
+4. `outputs/notifications/notification_001.md` and `outputs/review_packets/review_packet_001.md` to show what the marketing reviewer receives.
+5. `src/review_app.py` / Streamlit to show approve, request-edits, and reject decisions.
+6. `src/publish.py` to show that publishing fails closed unless approval exists.
+7. `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the structured CMS-style output after approval.
+
+The most important behavior to demo is the negative path: a draft can exist, but publishing is blocked unless a human approval decision exists and `publish_allowed` is true.
+
 ## Full Run Order
 
 Start by generating the idea brief, draft, quality check, review packet, and notification.
@@ -219,7 +233,7 @@ The publish step is the main safeguard. The system does not treat a generated dr
 
 For this version, I wanted the demo to behave the same way every time I ran it. The idea brief, draft, and quality check are generated with deterministic logic so the walkthrough is easier to inspect and less likely to fail because of one unpredictable model response.
 
-I chose this approach because the main focus of the prototype is the workflow around the draft. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
+I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer - traceability, review context, approval state, and safe publishing. I chose this approach because the main focus of the prototype is the workflow around the draft. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
 
 For a production version, I would swap out the deterministic parts for live LLM calls. These would use the prompt files in `prompts/`, the captured source posts, and `data/terret_context.md`. I would still preserve the same safeguards: structured outputs, checks for required fields, retries for malformed responses, and human review for drafts that are uncertain or risky.
 
