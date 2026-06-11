@@ -1,6 +1,6 @@
 # Notification: Blog Draft Ready for Review
 
-Generated at: 2026-06-11 15:32:20
+Generated at: 2026-06-11 16:21:10
 
 Hi Marketing Reviewer,
 
@@ -21,6 +21,21 @@ Review packet: `outputs/review_packets/review_packet_001.md`
 Quality check: `outputs/quality_checks/quality_check_001.md`
 
 Source evidence map: `outputs/source_maps/source_evidence_map_001.md`
+
+## Reviewer Decision Card
+
+**Recommended status:** Ready for human review
+
+**Reason:** Draft is structurally ready, but product language, source similarity, and claim strength need human review.
+
+**Required action:** Approve, request edits, or reject in the Streamlit review gate.
+
+**Publishing status:** Blocked until explicit approval.
+
+**Primary risks:**
+- Product-claim precision
+- Similarity to Justin Shriber source posts
+- Whether AI Architect language should appear publicly
 
 ## Why You Are Being Notified
 

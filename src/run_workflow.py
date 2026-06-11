@@ -526,6 +526,21 @@ Quality check: `{rel_path(quality_check_path)}`
 
 Source evidence map: `{rel_path(source_map_md_path)}`
 
+## Reviewer Decision Card
+
+**Recommended status:** Ready for human review
+
+**Reason:** Draft is structurally ready, but product language, source similarity, and claim strength need human review.
+
+**Required action:** Approve, request edits, or reject in the Streamlit review gate.
+
+**Publishing status:** Blocked until explicit approval.
+
+**Primary risks:**
+- Product-claim precision
+- Similarity to Justin Shriber source posts
+- Whether AI Architect language should appear publicly
+
 ## Why You Are Being Notified
 
 This draft has been generated, but it is not eligible for publishing yet. A human reviewer must approve, request edits, or reject it before the publish script can run successfully.
