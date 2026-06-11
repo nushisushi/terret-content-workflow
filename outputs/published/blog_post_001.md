@@ -70,9 +70,9 @@ A CRO does not only need to know that forecast risk increased in the Enterprise 
 
 A useful revenue AI system needs more than access to scattered data. It needs a governed foundation that connects the full revenue picture and keeps business context intact.
 
-That is the role of Terret Nexus.
+That is where Terret Nexus fits.
 
-Nexus is positioned as an answer-to-action revenue engine for teams that need root-cause analysis and operational follow-through. The foundation is the Revenue Graph: a connected view of revenue data across systems, designed to preserve context, governance, and workflow relevance.
+Nexus is built for answer-to-action revenue workflows: helping teams connect revenue context, understand root cause, and move from analysis into operational follow-through.
 
 The important shift is not just from dashboard to chatbot. It is from partial answers to operational action.
 

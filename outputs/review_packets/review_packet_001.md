@@ -12,6 +12,8 @@ Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 ## Source Posts Used
 
+Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
+
 justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
 ## What the Reviewer Should Decide

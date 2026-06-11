@@ -1,4 +1,4 @@
-# Quality Check: Blog Draft 001
+# Pre-Review Quality Checklist: Blog Draft 001
 
 Generated at: 2026-06-11 12:36:46
 
@@ -10,7 +10,7 @@ Draft file: `outputs/drafts/blog_draft_001.md`
 
 Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
-## Overall Recommendation
+## Recommendation for Human Review
 
 Approve for human review with light product-language review.
 
