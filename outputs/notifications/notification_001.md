@@ -1,6 +1,6 @@
 # Notification: Blog Draft Ready for Review
 
-Generated at: 2026-06-11 12:36:46
+Generated at: 2026-06-11 15:32:20
 
 Hi Marketing Reviewer,
 
@@ -19,6 +19,8 @@ Draft file: `outputs/drafts/blog_draft_001.md`
 Review packet: `outputs/review_packets/review_packet_001.md`
 
 Quality check: `outputs/quality_checks/quality_check_001.md`
+
+Source evidence map: `outputs/source_maps/source_evidence_map_001.md`
 
 ## Why You Are Being Notified
 

@@ -4,9 +4,9 @@ slug: "why-cros-need-more-than-an-llm-on-revenue-data"
 meta_description: "Why generic LLM layers fail CROs, and how governed revenue data turns answers into action."
 author: "Terret"
 status: "published"
-published_at_utc: "2026-06-11T19:37:18.542261+00:00"
+published_at_utc: "2026-06-11T22:33:09.336828+00:00"
 reviewed_by: "Demo Marketing Reviewer"
-reviewed_at_utc: "2026-06-11T19:37:05.623665+00:00"
+reviewed_at_utc: "2026-06-11T22:32:55.504774+00:00"
 tags:
   - AI revenue intelligence
   - Revenue Graph

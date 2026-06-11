@@ -1,6 +1,6 @@
 # Review Packet: Draft Ready
 
-Generated at: 2026-06-11 12:36:46
+Generated at: 2026-06-11 15:32:20
 
 ## Status
 
@@ -11,8 +11,6 @@ Ready for human marketing review.
 Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 ## Source Posts Used
-
-Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
 
 justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
@@ -28,6 +26,8 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_
 - JSON idea brief: `outputs/idea_briefs/idea_brief_001.json`
 - Blog draft: `outputs/drafts/blog_draft_001.md`
 - Quality check: `outputs/quality_checks/quality_check_001.md`
+- Source evidence map: `outputs/source_maps/source_evidence_map_001.md`
+- Source evidence JSON: `outputs/source_maps/source_evidence_map_001.json`
 
 ## Human Review Checklist
 

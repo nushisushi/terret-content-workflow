@@ -1,0 +1,69 @@
+[
+  {
+    "source_post_id": "justin_post_001",
+    "title_hint": "The difference between an answer and an outcome",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_a-lot-of-revenue-teams-have-come-to-the-same-activity-7470124159961034752-GY-B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "keyword_theme_flags": [
+      "LLM risk and governance",
+      "CRO root-cause questions",
+      "answer-to-action workflow"
+    ],
+    "representative_excerpt": "A lot of revenue teams have come to the same conclusion recently. We've got all this data. Why don't we just use an LLM to get to the root cause of what's happening in our business? I understand the instinct. But MCP server integrations actually create more...",
+    "reviewer_trace_note": "Reviewer should compare against the draft section on why a generic LLM layer is not enough; compare against the opening forecast, competitor, and rep-performance questions; compare against the answer-to-action positioning."
+  },
+  {
+    "source_post_id": "justin_post_002",
+    "title_hint": "Why CROs still cannot get to root cause",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-are-still-frustrated-despite-years-activity-7469791171922546688-8I24?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "keyword_theme_flags": [
+      "fragmented revenue data",
+      "CRO root-cause questions"
+    ],
+    "representative_excerpt": "CROs tell me, \"Justin, we've invested in every analytics platform.\" Now we're investing in AI. And we still can't get to the root cause of our biggest challenges. What's driving the drop in my forecast? What are my rainmakers doing that nobody else is? Why do...",
+    "reviewer_trace_note": "Reviewer should compare against the draft argument about connected revenue context; compare against the opening forecast, competitor, and rep-performance questions."
+  },
+  {
+    "source_post_id": "justin_post_003",
+    "title_hint": "Why CROs still cannot get real answers from their data",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-still-cant-get-real-answers-from-activity-7463603809320087552-VthC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "keyword_theme_flags": [
+      "fragmented revenue data",
+      "CRO root-cause questions"
+    ],
+    "representative_excerpt": "CROs have spent the last decade investing in analytics platforms. Now AI. They still can't answer their most basic questions. What's driving the drop in my forecast? What are my rainmakers doing that nobody else is? Why do we keep losing to this competitor?...",
+    "reviewer_trace_note": "Reviewer should compare against the draft argument about connected revenue context; compare against the opening forecast, competitor, and rep-performance questions."
+  },
+  {
+    "source_post_id": "justin_post_004",
+    "title_hint": "Three ways revenue orgs try to solve the data problem",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_there-are-three-ways-revenue-orgs-try-to-activity-7462164112999874560--iK3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "keyword_theme_flags": [
+      "manual workarounds that do not scale",
+      "agents need process design before execution",
+      "answer-to-action workflow"
+    ],
+    "representative_excerpt": "There are three ways revenue orgs try to solve the data problem. Two of them are traps. The first is human middleware. One person manually pulls data together every time a question comes up. It works until it doesn't, and it never scales. The second is the...",
+    "reviewer_trace_note": "Reviewer should compare against the critique of human middleware and data-lake detours; compare against the agent/process-design section; compare against the answer-to-action positioning."
+  },
+  {
+    "source_post_id": "justin_post_005",
+    "title_hint": "Why AI agents alone will not transform revenue organizations",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-ai-agents-alone-wont-transform-your-activity-7470501131618729986-hk36?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-10",
+    "capture_method": "manual public capture",
+    "keyword_theme_flags": [
+      "CRO root-cause questions",
+      "agents need process design before execution"
+    ],
+    "representative_excerpt": "AI agents are only as good as the instructions they're given. That's why they're not delivering the results most CROs expect. To get agents to execute well, a human has to go in, analyze your systems, understand all the data, and design the optimal processes...",
+    "reviewer_trace_note": "Reviewer should compare against the opening forecast, competitor, and rep-performance questions; compare against the agent/process-design section."
+  }
+]

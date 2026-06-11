@@ -10,6 +10,14 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_
 
 Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
 
+## Source Evidence Summary
+
+- `justin_post_001`: The difference between an answer and an outcome - Reviewer should compare against the draft section on why a generic LLM layer is not enough; compare against the opening forecast, competitor, and rep-performance questions; compare against the answer-to-action positioning.
+- `justin_post_002`: Why CROs still cannot get to root cause - Reviewer should compare against the draft argument about connected revenue context; compare against the opening forecast, competitor, and rep-performance questions.
+- `justin_post_003`: Why CROs still cannot get real answers from their data - Reviewer should compare against the draft argument about connected revenue context; compare against the opening forecast, competitor, and rep-performance questions.
+- `justin_post_004`: Three ways revenue orgs try to solve the data problem - Reviewer should compare against the critique of human middleware and data-lake detours; compare against the agent/process-design section; compare against the answer-to-action positioning.
+- `justin_post_005`: Why AI agents alone will not transform revenue organizations - Reviewer should compare against the opening forecast, competitor, and rep-performance questions; compare against the agent/process-design section.
+
 ## Source Signal Summary
 
 - Revenue leaders have invested in analytics platforms and AI, but still struggle to answer root-cause questions about forecast risk, deal loss, competitor pressure, and rep performance.

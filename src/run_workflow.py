@@ -22,6 +22,7 @@ DRAFT_DIR = ROOT / "outputs" / "drafts"
 REVIEW_PACKET_DIR = ROOT / "outputs" / "review_packets"
 NOTIFICATION_DIR = ROOT / "outputs" / "notifications"
 QUALITY_CHECK_DIR = ROOT / "outputs" / "quality_checks"
+SOURCE_MAP_DIR = ROOT / "outputs" / "source_maps"
 
 
 def rel_path(path: Path) -> str:
@@ -86,12 +87,139 @@ def load_source_posts(path: Path) -> list[dict[str, Any]]:
     return posts
 
 
+def make_excerpt(text: str, max_chars: int = 260) -> str:
+    cleaned = " ".join(text.split())
+
+    if len(cleaned) <= max_chars:
+        return cleaned
+
+    return cleaned[:max_chars].rsplit(" ", 1)[0] + "..."
+
+
+def flag_source_themes(raw_text: str) -> list[str]:
+    text = raw_text.lower()
+    theme_flags: list[str] = []
+
+    if any(term in text for term in ["llm", "mcp", "security", "accuracy", "access control"]):
+        theme_flags.append("LLM risk and governance")
+
+    if any(term in text for term in ["scattered", "puzzle", "crm", "call transcripts", "email"]):
+        theme_flags.append("fragmented revenue data")
+
+    if any(term in text for term in ["forecast", "rainmakers", "competitor", "root cause"]):
+        theme_flags.append("CRO root-cause questions")
+
+    if any(term in text for term in ["human middleware", "data lake", "manually", "manual"]):
+        theme_flags.append("manual workarounds that do not scale")
+
+    if any(term in text for term in ["agent", "agents", "architect", "instructions", "execute"]):
+        theme_flags.append("agents need process design before execution")
+
+    if any(term in text for term in ["outcome", "operationalize", "action", "implement"]):
+        theme_flags.append("answer-to-action workflow")
+
+    if not theme_flags:
+        theme_flags.append("general revenue intelligence positioning")
+
+    return theme_flags
+
+
+def explain_reviewer_trace_note(theme_flags: list[str]) -> str:
+    trace_notes = []
+
+    if "LLM risk and governance" in theme_flags:
+        trace_notes.append(
+            "compare against the draft section on why a generic LLM layer is not enough"
+        )
+
+    if "fragmented revenue data" in theme_flags:
+        trace_notes.append(
+            "compare against the draft argument about connected revenue context"
+        )
+
+    if "CRO root-cause questions" in theme_flags:
+        trace_notes.append(
+            "compare against the opening forecast, competitor, and rep-performance questions"
+        )
+
+    if "manual workarounds that do not scale" in theme_flags:
+        trace_notes.append(
+            "compare against the critique of human middleware and data-lake detours"
+        )
+
+    if "agents need process design before execution" in theme_flags:
+        trace_notes.append("compare against the agent/process-design section")
+
+    if "answer-to-action workflow" in theme_flags:
+        trace_notes.append("compare against the answer-to-action positioning")
+
+    if not trace_notes:
+        return "Use this source as general context when checking the draft."
+
+    return "Reviewer should " + "; ".join(trace_notes) + "."
+
+
+def build_source_evidence_map(posts: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    evidence_map = []
+
+    for post in posts:
+        theme_flags = flag_source_themes(post["raw_text"])
+
+        evidence_map.append(
+            {
+                "source_post_id": post["id"],
+                "title_hint": post["title_hint"],
+                "post_url": post["post_url"],
+                "date_captured": post["date_captured"],
+                "capture_method": post["capture_method"],
+                "keyword_theme_flags": theme_flags,
+                "representative_excerpt": make_excerpt(post["raw_text"]),
+                "reviewer_trace_note": explain_reviewer_trace_note(theme_flags),
+            }
+        )
+
+    return evidence_map
+
+
+def render_source_evidence_markdown(evidence_map: list[dict[str, Any]]) -> str:
+    sections = [
+        "# Source Evidence Map",
+        "",
+        "This map is generated from the captured source posts at runtime. It gives the reviewer source URLs, excerpts, keyword-based theme flags, and trace notes so they can quickly trace which source themes informed the representative draft.",
+        "",
+        "This is not a live LLM citation system. It is a reviewer-facing traceability layer for the deterministic prototype.",
+        "",
+    ]
+
+    for item in evidence_map:
+        theme_flags = "\n".join(
+            f"- {theme}" for theme in item["keyword_theme_flags"]
+        )
+
+        sections.append(
+            f"## {item['source_post_id']}: {item['title_hint']}\n\n"
+            f"Source URL: {item['post_url']}\n\n"
+            f"Date captured: {item['date_captured']}\n\n"
+            f"Capture method: {item['capture_method']}\n\n"
+            f"### Keyword theme flags\n\n"
+            f"{theme_flags}\n\n"
+            f"### Representative excerpt\n\n"
+            f"> {item['representative_excerpt']}\n\n"
+            f"### Reviewer trace note\n\n"
+            f"{item['reviewer_trace_note']}\n"
+        )
+
+    return "\n".join(sections)
+
+
 def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
     source_post_ids = [post["id"] for post in posts]
+    source_evidence_map = build_source_evidence_map(posts)
 
     return {
         "working_title": "Why CROs Need More Than an LLM on Top of Their Revenue Data",
         "source_post_ids": source_post_ids,
+        "source_evidence_map": source_evidence_map,
         "source_signal_summary": [
             "Revenue leaders have invested in analytics platforms and AI, but still struggle to answer root-cause questions about forecast risk, deal loss, competitor pressure, and rep performance.",
             "The recurring blocker is not a lack of data. It is fragmented revenue data spread across CRM records, calls, emails, data warehouses, ERP systems, and product usage signals.",
@@ -229,6 +357,12 @@ def render_idea_brief_markdown(brief: dict[str, Any]) -> str:
         )
 
     source_summary = "\n".join(f"- {item}" for item in brief["source_signal_summary"])
+    source_evidence = "\n".join(
+        "- "
+        f"`{item['source_post_id']}`: {item['title_hint']} - "
+        f"{item['reviewer_trace_note']}"
+        for item in brief["source_evidence_map"]
+    )
     careful_claims = "\n".join(f"- {item}" for item in brief["claims_to_handle_carefully"])
     review_notes = "\n".join(f"- {item}" for item in brief["human_review_notes"])
     secondary_keywords = "\n".join(
@@ -249,6 +383,10 @@ def render_idea_brief_markdown(brief: dict[str, Any]) -> str:
 {", ".join(brief["source_post_ids"])}
 
 Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
+
+## Source Evidence Summary
+
+{source_evidence}
 
 ## Source Signal Summary
 
@@ -306,6 +444,8 @@ def render_review_packet(
     idea_brief_json_path: Path,
     blog_draft_path: Path,
     quality_check_path: Path,
+    source_map_md_path: Path,
+    source_map_json_path: Path,
 ) -> str:
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     review_notes = "\n".join(f"- {note}" for note in brief["human_review_notes"])
@@ -338,6 +478,8 @@ Ready for human marketing review.
 - JSON idea brief: `{rel_path(idea_brief_json_path)}`
 - Blog draft: `{rel_path(blog_draft_path)}`
 - Quality check: `{rel_path(quality_check_path)}`
+- Source evidence map: `{rel_path(source_map_md_path)}`
+- Source evidence JSON: `{rel_path(source_map_json_path)}`
 
 ## Human Review Checklist
 
@@ -354,6 +496,7 @@ def render_notification_markdown(
     blog_draft_path: Path,
     review_packet_path: Path,
     quality_check_path: Path,
+    source_map_md_path: Path,
 ) -> str:
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_post_ids = ", ".join(brief["source_post_ids"])
@@ -380,6 +523,8 @@ Draft file: `{rel_path(blog_draft_path)}`
 Review packet: `{rel_path(review_packet_path)}`
 
 Quality check: `{rel_path(quality_check_path)}`
+
+Source evidence map: `{rel_path(source_map_md_path)}`
 
 ## Why You Are Being Notified
 
@@ -590,6 +735,7 @@ def main() -> None:
     REVIEW_PACKET_DIR.mkdir(parents=True, exist_ok=True)
     NOTIFICATION_DIR.mkdir(parents=True, exist_ok=True)
     QUALITY_CHECK_DIR.mkdir(parents=True, exist_ok=True)
+    SOURCE_MAP_DIR.mkdir(parents=True, exist_ok=True)
 
     posts = load_source_posts(SOURCE_POSTS_PATH)
 
@@ -621,6 +767,8 @@ def main() -> None:
     review_packet_path = REVIEW_PACKET_DIR / "review_packet_001.md"
     notification_path = NOTIFICATION_DIR / "notification_001.md"
     quality_check_path = QUALITY_CHECK_DIR / "quality_check_001.md"
+    source_map_json_path = SOURCE_MAP_DIR / "source_evidence_map_001.json"
+    source_map_md_path = SOURCE_MAP_DIR / "source_evidence_map_001.md"
 
     idea_brief_json_path.write_text(
         json.dumps(brief, indent=2, ensure_ascii=False),
@@ -628,6 +776,14 @@ def main() -> None:
     )
     idea_brief_md_path.write_text(
         render_idea_brief_markdown(brief),
+        encoding="utf-8",
+    )
+    source_map_json_path.write_text(
+        json.dumps(brief["source_evidence_map"], indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    source_map_md_path.write_text(
+        render_source_evidence_markdown(brief["source_evidence_map"]),
         encoding="utf-8",
     )
     blog_draft_path.write_text(
@@ -649,6 +805,8 @@ def main() -> None:
             idea_brief_json_path,
             blog_draft_path,
             quality_check_path,
+            source_map_md_path,
+            source_map_json_path,
         ),
         encoding="utf-8",
     )
@@ -659,6 +817,7 @@ def main() -> None:
             blog_draft_path,
             review_packet_path,
             quality_check_path,
+            source_map_md_path,
         ),
         encoding="utf-8",
     )
@@ -668,6 +827,10 @@ def main() -> None:
     print("Stage 1 complete: idea brief generated.")
     print(f"- {rel_path(idea_brief_json_path)}")
     print(f"- {rel_path(idea_brief_md_path)}")
+    print()
+    print("Source evidence map generated.")
+    print(f"- {rel_path(source_map_json_path)}")
+    print(f"- {rel_path(source_map_md_path)}")
     print()
     print("Stage 2 complete: blog draft generated.")
     print(f"- {rel_path(blog_draft_path)}")
