@@ -1,6 +1,6 @@
 # Terret Agentic Content Workflow
 
-This is my take-home project for Terret’s Agentic Workflow Intern interview. I built a local prototype of the content workflow in the brief: public LinkedIn signal in, Terret-style blog draft out, with human review required before anything can be published.
+This is my take-home project for Terret’s Agentic Systems Engineering Intern interview. I built a local prototype of the content workflow in the brief: public LinkedIn signal in, Terret-style blog draft out, with human review required before anything can be published.
 
 I prioritized building one complete vertical slice rather than connecting every production integration at once. The workflow starts with captured Justin Shriber posts, creates draft and review materials, notifies a reviewer, saves the review decision from the Streamlit app, and writes the final Markdown post only after it is approved.
 
@@ -68,12 +68,11 @@ I think of the workflow in four layers:
 * **Activation layer:** publish script that only writes the public Markdown post after approval
 
 
-
-Live example:
+## Live Example
 
 ```text
 Why CROs Need More Than an LLM on Top of Their Revenue Data
-```
+
 My main goal was to show how the control layer works in a content workflow.
 
 The prototype collects the source signal, prepares reviewer-facing materials, sends notifications, tracks approvals, and stops publishing if approval is missing. The draft moves through the system as a content artifact, but it cannot be published on its own.
@@ -231,11 +230,11 @@ The publish step is the main safeguard. The system does not treat a generated dr
 
 ### Why the demo uses deterministic generation
 
-For this version, I wanted the demo to behave the same way every time I ran it. The idea brief, draft, and quality check are generated with deterministic logic so the walkthrough is easier to inspect and less likely to fail because of one unpredictable model response.
+For this version, I wanted the demo to behave the same way every time I ran it. The idea brief, draft, and quality check are generated with deterministic logic so the walkthrough is easier to inspect and less likely to fail because of an unpredictable model response.
 
-I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer - traceability, review context, approval state, and safe publishing. I chose this approach because the main focus of the prototype is the workflow around the draft. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
+I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer: traceability, review context, approval state, and safe publishing. I chose this approach because the highest-risk part of this scoped prototype is the workflow around the draft. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
 
-For a production version, I would swap out the deterministic parts for live LLM calls. These would use the prompt files in `prompts/`, the captured source posts, and `data/terret_context.md`. I would still preserve the same safeguards: structured outputs, checks for required fields, retries for malformed responses, and human review for drafts that are uncertain or risky.
+In a production version, I would replace deterministic components with live LLM calls using the prompt files in prompts/, captured source posts, and data/terret_context.md. I would retain safeguards such as structured outputs, required field checks, retries for invalid responses, and human review for drafts that appear uncertain or risky.
 
 ## What Still Breaks
 
