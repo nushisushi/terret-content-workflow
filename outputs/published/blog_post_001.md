@@ -4,9 +4,9 @@ slug: "why-cros-need-more-than-an-llm-on-revenue-data"
 meta_description: "Why generic LLM layers fail CROs, and how governed revenue data turns answers into action."
 author: "Terret"
 status: "published"
-published_at_utc: "2026-06-11T00:38:15.392010+00:00"
+published_at_utc: "2026-06-11T19:27:23.348064+00:00"
 reviewed_by: "Demo Marketing Reviewer"
-reviewed_at_utc: "2026-06-11T00:37:59.943817+00:00"
+reviewed_at_utc: "2026-06-11T19:27:14.628055+00:00"
 tags:
   - AI revenue intelligence
   - Revenue Graph
@@ -80,7 +80,7 @@ That also changes how revenue teams should think about agents. Agents are only u
 
 In Justin Shriber's framing, revenue AI needs an architecture layer before the agent layer. One layer diagnoses the revenue environment and designs the right workflow. The next layer executes the operational steps.
 
-In practice, that means the system should help revenue teams move from a question like â€œWhy did forecast move?â€ to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
+In practice, that means the system should help revenue teams move from a question like "Why did forecast move?" to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
 
 ## Why This Matters for CROs and RevOps Leaders
 

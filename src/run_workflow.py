@@ -44,6 +44,9 @@ def load_source_posts(path: Path) -> list[dict[str, Any]]:
     if not isinstance(posts, list):
         raise ValueError("source_posts.json must contain a JSON array.")
 
+    if not posts:
+        raise ValueError("source_posts.json must contain at least one post.")
+
     required_fields = {
         "id",
         "author",
@@ -56,12 +59,31 @@ def load_source_posts(path: Path) -> list[dict[str, Any]]:
         "raw_text",
     }
 
-    for post in posts:
+    seen_ids: set[str] = set()
+
+    seen_ids: set[str] = set()
+
+    for index, post in enumerate(posts):
+        if not isinstance(post, dict):
+            raise ValueError(f"Post at index {index} must be a JSON object.")
+
         missing = required_fields - set(post.keys())
         if missing:
             raise ValueError(
                 f"Post {post.get('id', '<unknown>')} is missing fields: {missing}"
             )
+
+        post_id = post["id"]
+
+        if post_id in seen_ids:
+            raise ValueError(f"Duplicate source post id found: {post_id}")
+        seen_ids.add(post_id)
+
+        if not isinstance(post["raw_text"], str) or not post["raw_text"].strip():
+            raise ValueError(f"Post {post_id} has empty raw_text.")
+
+        if not isinstance(post["post_url"], str) or not post["post_url"].startswith("http"):
+            raise ValueError(f"Post {post_id} has an invalid post_url.")
 
     return posts
 
@@ -472,7 +494,7 @@ That also changes how revenue teams should think about agents. Agents are only u
 
 In Justin Shriber's framing, revenue AI needs an architecture layer before the agent layer. One layer diagnoses the revenue environment and designs the right workflow. The next layer executes the operational steps.
 
-In practice, that means the system should help revenue teams move from a question like â€œWhy did forecast move?â€ to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
+In practice, that means the system should help revenue teams move from a question like "Why did forecast move?" to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
 
 ## Why This Matters for CROs and RevOps Leaders
 
@@ -568,6 +590,10 @@ def main() -> None:
     QUALITY_CHECK_DIR.mkdir(parents=True, exist_ok=True)
 
     posts = load_source_posts(SOURCE_POSTS_PATH)
+
+    # These files are loaded and validated as production extension points.
+    # The current demo uses deterministic generation so the walkthrough is stable,
+    # but a live LLM call would use these prompt blueprints and Terret context.
     terret_context = read_text(TERRET_CONTEXT_PATH)
     idea_brief_prompt = read_text(IDEA_BRIEF_PROMPT_PATH)
     blog_generation_prompt = read_text(BLOG_GENERATION_PROMPT_PATH)
