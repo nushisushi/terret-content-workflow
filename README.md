@@ -134,7 +134,7 @@ Source posts are stored in:
 data/source_posts.json
 ```
 
-The source file contains four public LinkedIn posts from Justin Shriber. I picked posts that all center on the same problem: revenue teams have plenty of tools and data, but still struggle to answer practical CRO questions like why forecast changed, why deals are slipping, or what the team should do next.
+The source file contains five public LinkedIn posts from Justin Shriber. I picked posts that all center on the same problem: revenue teams have plenty of tools and data, but still struggle to answer practical CRO questions like why forecast changed, why deals are slipping, or what the team should do next.
 
 I added the posts manually instead of scraping LinkedIn. That was a deliberate shortcut. For this project, the interesting part was not building a LinkedIn scraper. It was showing what happens after the source signal is captured: how it becomes an idea brief, how that turns into a draft, how a reviewer checks it, and how publishing stays blocked until approval.
 

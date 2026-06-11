@@ -1,6 +1,6 @@
 # Notification: Blog Draft Ready for Review
 
-Generated at: 2026-06-10 16:56:14
+Generated at: 2026-06-10 17:36:53
 
 Hi Marketing Reviewer,
 
@@ -10,7 +10,7 @@ A new Terret blog draft is ready for review.
 
 Title: Why CROs Need More Than an LLM on Top of Their Revenue Data
 
-Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004
+Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
 Draft file: `outputs/drafts/blog_draft_001.md`
 
@@ -28,6 +28,7 @@ This draft has been generated, but it is not eligible for publishing yet. A huma
 - Confirm that all product claims are supported by the Terret context file or public site language.
 - Review whether any cost, scale, or competitive claims need softer phrasing.
 - Confirm that the article speaks to CRO and RevOps pain rather than generic AI adoption.
+- Check whether AI Architect terminology should appear in the public blog or stay as internal/source framing.
 - Confirm that the next stage should draft a blog post, not publish anything automatically.
 
 ## Suggested Next Action

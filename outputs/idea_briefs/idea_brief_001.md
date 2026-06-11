@@ -6,7 +6,7 @@ Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 ## Source Post IDs
 
-justin_post_001, justin_post_002, justin_post_003, justin_post_004
+justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
 ## Source Signal Summary
 
@@ -15,10 +15,11 @@ justin_post_001, justin_post_002, justin_post_003, justin_post_004
 - Generic LLM layers can create enterprise risks around access controls, quantitative accuracy, and scale when they are not grounded in governed, connected business data.
 - Manual human middleware and large revenue data lake projects may produce answers, but they still leave teams with the burden of translating those answers into action.
 - The strongest Terret angle is the shift from isolated answers to an answer-to-action revenue workflow powered by a connected Revenue Graph.
+- AI agents alone are not enough if they are executing weak instructions. They need a process-design layer that can analyze the revenue environment, determine the right workflow, and then hand execution to agents.
 
 ## Core Argument
 
-CROs do not need another interface that lets them ask questions of incomplete revenue data. They need a governed system that connects the full revenue picture, produces reliable root-cause analysis, and turns those answers into operational action. The blog should argue that the failure mode of generic AI in revenue organizations is not the model alone. It is the missing data foundation, governance layer, and execution loop.
+CROs do not need another interface that lets them ask questions of incomplete revenue data. They need a governed system that connects the full revenue picture, produces reliable root-cause analysis, and turns those answers into operational action. The blog should argue that the failure mode of generic AI in revenue organizations is not the model alone. It is the missing data foundation, governance layer, process-design layer, and execution loop.
 
 ## Target Reader
 
@@ -28,7 +29,7 @@ Reader pain: They are under pressure to explain forecast movement, deal loss, co
 
 ## Terret Positioning Angle
 
-Introduce Terret Nexus as an operator-built answer-to-action revenue engine. It should not be framed as just another dashboard, chatbot, or analytics layer. Position Nexus as the system that builds a governed Revenue Graph, analyzes the full revenue picture, and helps operationalize the answer through revenue workflows and agents.
+Introduce Terret Nexus as an operator-built answer-to-action revenue engine. It should not be framed as just another dashboard, chatbot, or analytics layer. Position Nexus as the system that builds a governed Revenue Graph, analyzes the full revenue picture, and helps operationalize the answer through process design, revenue workflows, and agents.
 
 ## Suggested Blog Structure
 
@@ -66,6 +67,7 @@ Purpose: Introduce the Terret Nexus approach without turning the post into a bro
 Key points:
   - A Revenue Graph connects the full revenue reality.
   - Governed context supports better analysis.
+  - Agents need strong process design before they can execute useful revenue work.
   - Agents and workflows help move from explanation to execution.
 ### The Takeaway for CROs
 Purpose: End with a practical executive takeaway.
@@ -73,6 +75,7 @@ Purpose: End with a practical executive takeaway.
 Key points:
   - Do not evaluate revenue AI only by the quality of its interface.
   - Evaluate whether it has the governed data foundation to answer accurately.
+  - Evaluate whether it can design the right workflow before agents execute.
   - Evaluate whether it can turn answers into action inside the revenue workflow.
 
 ## SEO / AEO / GEO Notes
@@ -85,11 +88,13 @@ Secondary keywords:
 - CRO forecast risk
 - answer-to-action revenue engine
 - RevOps AI workflow
+- AI revenue agents
 
 Direct-answer questions:
 - Why do CROs still struggle to get answers from revenue data?
 - Why is a generic LLM layer not enough for enterprise revenue intelligence?
 - What is an answer-to-action revenue workflow?
+- Why do AI agents need strong process design in revenue organizations?
 
 Suggested slug: `why-cros-need-more-than-an-llm-on-revenue-data`
 
@@ -100,6 +105,7 @@ Suggested meta description: Why generic LLM layers fail CROs, and how governed r
 - The source posts include strong claims about MCP integrations, LLM accuracy, and enterprise scale. The blog should frame these as risks of generic or poorly governed implementations, not as universal statements.
 - The human middleware post includes specific cost and timeline claims about revenue data lakes. Use these as anecdotal context only or soften into broader language about expensive infrastructure projects.
 - Terret positioning phrases such as 'answers the revenue questions no other AI can handle' should be treated as brand language, not independently verified proof.
+- The AI Architect framing is a source-post concept from Justin Shriber. Treat it as Terret/Justin framing, not as a universally established market category unless approved by the reviewer.
 - Avoid claiming Terret guarantees revenue outcomes unless supported by approved public proof points.
 
 ## Human Review Notes
@@ -108,6 +114,7 @@ Suggested meta description: Why generic LLM layers fail CROs, and how governed r
 - Confirm that all product claims are supported by the Terret context file or public site language.
 - Review whether any cost, scale, or competitive claims need softer phrasing.
 - Confirm that the article speaks to CRO and RevOps pain rather than generic AI adoption.
+- Check whether AI Architect terminology should appear in the public blog or stay as internal/source framing.
 - Confirm that the next stage should draft a blog post, not publish anything automatically.
 
 ## Recommended Next Stage

@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import json
@@ -77,12 +78,14 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
             "Generic LLM layers can create enterprise risks around access controls, quantitative accuracy, and scale when they are not grounded in governed, connected business data.",
             "Manual human middleware and large revenue data lake projects may produce answers, but they still leave teams with the burden of translating those answers into action.",
             "The strongest Terret angle is the shift from isolated answers to an answer-to-action revenue workflow powered by a connected Revenue Graph.",
+            "AI agents alone are not enough if they are executing weak instructions. They need a process-design layer that can analyze the revenue environment, determine the right workflow, and then hand execution to agents.",
         ],
         "core_argument": (
             "CROs do not need another interface that lets them ask questions of incomplete revenue data. "
             "They need a governed system that connects the full revenue picture, produces reliable root-cause analysis, "
             "and turns those answers into operational action. The blog should argue that the failure mode of generic AI "
-            "in revenue organizations is not the model alone. It is the missing data foundation, governance layer, and execution loop."
+            "in revenue organizations is not the model alone. It is the missing data foundation, governance layer, "
+            "process-design layer, and execution loop."
         ),
         "target_reader": {
             "primary_reader": "CROs, VPs of Sales, and Revenue Operations leaders at B2B companies with complex sales motions",
@@ -94,7 +97,7 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
         "terret_positioning_angle": (
             "Introduce Terret Nexus as an operator-built answer-to-action revenue engine. It should not be framed as just another dashboard, "
             "chatbot, or analytics layer. Position Nexus as the system that builds a governed Revenue Graph, analyzes the full revenue picture, "
-            "and helps operationalize the answer through revenue workflows and agents."
+            "and helps operationalize the answer through process design, revenue workflows, and agents."
         ),
         "suggested_outline": [
             {
@@ -139,6 +142,7 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
                 "key_points": [
                     "A Revenue Graph connects the full revenue reality.",
                     "Governed context supports better analysis.",
+                    "Agents need strong process design before they can execute useful revenue work.",
                     "Agents and workflows help move from explanation to execution.",
                 ],
             },
@@ -148,6 +152,7 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
                 "key_points": [
                     "Do not evaluate revenue AI only by the quality of its interface.",
                     "Evaluate whether it has the governed data foundation to answer accurately.",
+                    "Evaluate whether it can design the right workflow before agents execute.",
                     "Evaluate whether it can turn answers into action inside the revenue workflow.",
                 ],
             },
@@ -160,11 +165,13 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
                 "CRO forecast risk",
                 "answer-to-action revenue engine",
                 "RevOps AI workflow",
+                "AI revenue agents",
             ],
             "direct_answer_questions": [
                 "Why do CROs still struggle to get answers from revenue data?",
                 "Why is a generic LLM layer not enough for enterprise revenue intelligence?",
                 "What is an answer-to-action revenue workflow?",
+                "Why do AI agents need strong process design in revenue organizations?",
             ],
             "suggested_slug": "why-cros-need-more-than-an-llm-on-revenue-data",
             "suggested_meta_description": (
@@ -175,6 +182,7 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
             "The source posts include strong claims about MCP integrations, LLM accuracy, and enterprise scale. The blog should frame these as risks of generic or poorly governed implementations, not as universal statements.",
             "The human middleware post includes specific cost and timeline claims about revenue data lakes. Use these as anecdotal context only or soften into broader language about expensive infrastructure projects.",
             "Terret positioning phrases such as 'answers the revenue questions no other AI can handle' should be treated as brand language, not independently verified proof.",
+            "The AI Architect framing is a source-post concept from Justin Shriber. Treat it as Terret/Justin framing, not as a universally established market category unless approved by the reviewer.",
             "Avoid claiming Terret guarantees revenue outcomes unless supported by approved public proof points.",
         ],
         "human_review_notes": [
@@ -182,6 +190,7 @@ def build_idea_brief(posts: list[dict[str, Any]]) -> dict[str, Any]:
             "Confirm that all product claims are supported by the Terret context file or public site language.",
             "Review whether any cost, scale, or competitive claims need softer phrasing.",
             "Confirm that the article speaks to CRO and RevOps pain rather than generic AI adoption.",
+            "Check whether AI Architect terminology should appear in the public blog or stay as internal/source framing.",
             "Confirm that the next stage should draft a blog post, not publish anything automatically.",
         ],
         "recommended_next_stage": "draft_blog",
@@ -390,6 +399,7 @@ def render_blog_draft(brief: dict[str, Any]) -> str:
         "RevOps",
         "CRO",
         "answer-to-action",
+        "AI agents",
     ]
 
     return f"""---
@@ -458,7 +468,11 @@ Nexus is positioned as an answer-to-action revenue engine for teams that need ro
 
 The important shift is not just from dashboard to chatbot. It is from partial answers to operational action.
 
-In practice, that means the system should help revenue teams move from a question like “Why did forecast move?” to the underlying drivers, the affected deals, the relevant team behaviors, and the next steps required to respond.
+That also changes how revenue teams should think about agents. Agents are only useful if they are executing the right process. If the instructions are weak, incomplete, or based on partial analysis, automating the workflow only makes the wrong motion run faster.
+
+In Justin Shriber's framing, revenue AI needs an architecture layer before the agent layer. One layer diagnoses the revenue environment and designs the right workflow. The next layer executes the operational steps.
+
+In practice, that means the system should help revenue teams move from a question like â€œWhy did forecast move?â€ to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
 
 ## Why This Matters for CROs and RevOps Leaders
 
@@ -476,7 +490,7 @@ Third, the output has to move toward action. A useful system should support aler
 
 Do not evaluate revenue AI only by the quality of the interface. A clean chat experience can still produce shallow answers if the system underneath it cannot see the full picture.
 
-The better question is whether the system can connect revenue data, explain root cause, and help the team act.
+The better question is whether the system can connect revenue data, explain root cause, and design the right workflow before agents execute.
 
 For CROs and RevOps leaders, that is the real dividing line. The next generation of revenue intelligence will not be defined by who can generate the most fluent answer. It will be defined by who can turn the right answer into the next right action.
 
@@ -487,6 +501,8 @@ For CROs and RevOps leaders, that is the real dividing line. The next generation
 - The source posts include anecdotal claims about revenue data lake cost and implementation burden. This draft avoids repeating specific dollar amounts.
 - The draft treats Terret positioning as brand framing, not independently verified proof.
 - The draft should be checked for similarity to Justin Shriber's LinkedIn posts before approval.
+- The new AI agents source post introduces AI Architect framing. Review whether that terminology should appear publicly or remain source/context framing.
+- The draft now treats agents as execution layers that need strong process design before they can produce reliable revenue outcomes.
 - Recommended reviewer decision: approve with light edits if product language matches approved Terret positioning.
 """
 
@@ -514,16 +530,16 @@ Source posts used: {source_post_ids}
 
 Approve for human review with light product-language review.
 
-This draft is ready for a marketing reviewer to evaluate. It should not be published automatically. The main risks are product-claim precision, similarity to the source LinkedIn posts, and whether the final language matches approved Terret positioning.
+This draft is ready for a marketing reviewer to evaluate. It should not be published automatically. The main risks are product-claim precision, similarity to the source LinkedIn posts, AI Architect terminology, and whether the final language matches approved Terret positioning.
 
 ## Scores
 
 | Category | Score | Notes |
 | --- | ---: | --- |
 | Originality | 4/5 | The draft uses the source posts as a theme cluster rather than copying their structure directly. |
-| Terret Fit | 4/5 | The post speaks to CRO and RevOps pain around fragmented revenue data and root-cause analysis. |
-| Product Claim Safety | 3/5 | Claims around Nexus, Revenue Graph, speed, scale, and automation should still be checked by a human reviewer. |
-| Structure and Readability | 4/5 | The argument moves clearly from fragmented data to answer-to-action workflow. |
+| Terret Fit | 4/5 | The post speaks to CRO and RevOps pain around fragmented revenue data, root-cause analysis, and answer-to-action execution. |
+| Product Claim Safety | 3/5 | Claims around Nexus, Revenue Graph, speed, scale, AI Architect framing, and automation should still be checked by a human reviewer. |
+| Structure and Readability | 4/5 | The argument moves clearly from fragmented data to process design and answer-to-action workflow. |
 | SEO / AEO / GEO Readiness | 4/5 | The draft includes title, slug, meta description, headings, tags, and direct-answer framing. |
 
 ## Checks
@@ -537,8 +553,9 @@ This draft is ready for a marketing reviewer to evaluate. It should not be publi
 ## Specific Reviewer Notes
 
 - Confirm that Terret Nexus and Revenue Graph language matches approved company positioning.
-- Check whether any speed, scale, cost, or automation claims need softer wording.
+- Check whether any speed, scale, cost, AI Architect, or automation claims need softer wording.
 - Confirm that the post is sufficiently original compared with Justin Shriber's LinkedIn posts.
+- Confirm whether AI Architect terminology should appear in the public draft.
 - Confirm that the CTA and final framing match Terret's current marketing priorities.
 """
 

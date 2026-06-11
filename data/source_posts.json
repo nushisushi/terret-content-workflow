@@ -1,52 +1,62 @@
 [
-{
-"id": "justin_post_001",
-"author": "Justin Shriber",
-"title_hint": "The difference between an answer and an outcome",
-"platform": "LinkedIn",
-"profile_url": "https://www.linkedin.com/in/justinshriber/",
-"post_url": "https://www.linkedin.com/posts/justinshriber_a-lot-of-revenue-teams-have-come-to-the-same-activity-7470124159961034752-GY-B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
-"date_captured": "2026-06-09",
-"capture_method": "manual public capture",
-"status": "new",
-"raw_text": "A lot of revenue teams have come to the same conclusion recently.\n\nWe've got all this data. Why don't we just use an LLM to get to the root cause of what's happening in our business?\n\nI understand the instinct. But MCP server integrations actually create more problems in an enterprise than they solve.\n\nFirst, there's the matter of security.\n\nEvery underlying data system has its own access controls. When you use an LLM to bypass those controls, you're creating security holes, giving people access to information they shouldn't be able to see.\n\nSecond, there's quantitative accuracy.\n\nLLMs are notoriously bad at running calculations. Ask one what your ARR was last quarter and every time you ask, it's going to come up with a different way to calculate the number. And if it's missing context, it's just going to make it up. You get inconsistent, inaccurate numbers every time.\n\nThird, performance at scale.\n\nAsking an LLM to run across multiple systems, thread all of them together, and then reason on top of it is an incredibly inefficient approach. It won't scale in an enterprise environment.\n\nThis is exactly why we built Terret Nexus.\n\nWe sit across all of your revenue-facing systems, aggregate the information, and interface with LLMs to give you fast, accurate answers to the questions that matter. And then we operationalize those answers.\n\nThat's the difference between an answer and an outcome."
-},
-{
-"id": "justin_post_002",
-"author": "Justin Shriber",
-"title_hint": "Why CROs still cannot get to root cause",
-"platform": "LinkedIn",
-"profile_url": "https://www.linkedin.com/in/justinshriber/",
-"post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-are-still-frustrated-despite-years-activity-7469791171922546688-8I24?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
-"date_captured": "2026-06-09",
-"capture_method": "manual public capture",
-"status": "new",
-"raw_text": "CROs tell me, \"Justin, we've invested in every analytics platform.\" Now we're investing in AI. And we still can't get to the root cause of our biggest challenges.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThese aren't new questions. The difference is that now there's an expectation that AI can finally answer them.\n\nThe reason it hasn't comes down to data.\n\nNot a lack of it. There's more data in most organizations than ever before.\n\nThe problem is that it's scattered across systems that don't talk to each other like a puzzle whose pieces have been thrown all over a room.\n\nTerret Nexus puts the puzzle together."
-},
-
-{
-"id": "justin_post_003",
-"author": "Justin Shriber",
-"title_hint": "Why CROs still cannot get real answers from their data",
-"platform": "LinkedIn",
-"profile_url": "https://www.linkedin.com/in/justinshriber/",
-"post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-still-cant-get-real-answers-from-activity-7463603809320087552-VthC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
-"date_captured": "2026-06-09",
-"capture_method": "manual public capture",
-"status": "new",
-"raw_text": "CROs have spent the last decade investing in analytics platforms. Now AI.\n\nThey still can't answer their most basic questions.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThat's not a tools problem. The tools are fine.\n\nThe problem is that the data is like a puzzle whose pieces have been scattered all over a room.\n\nCRM over here. Call transcripts over there. Email threads, ERP data, product usage -- all in separate systems, none of them talking to each other.\n\nSo when a platform tries to answer a question, it's only working with what it can see. And what it can see is never the whole picture.\n\nThe CROs getting real answers right now didn't buy a better platform. They built a complete picture first.\n\nThat's what we do at Terret.ai."
-},
-
-{
-"id": "justin_post_004",
-"author": "Justin Shriber",
-"title_hint": "Three ways revenue orgs try to solve the data problem",
-"platform": "LinkedIn",
-"profile_url": "https://www.linkedin.com/in/justinshriber/",
-"post_url": "https://www.linkedin.com/posts/justinshriber_there-are-three-ways-revenue-orgs-try-to-activity-7462164112999874560--iK3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
-"date_captured": "2026-06-09",
-"capture_method": "manual public capture",
-"status": "new",
-"raw_text": "There are three ways revenue orgs try to solve the data problem. Two of them are traps.\n\nThe first is human middleware. One person manually pulls data together every time a question comes up. It works until it doesn't, and it never scales.\n\nThe second is the revenue data lake. It takes months to build, $1M+ to maintain, and every new question means more systems work. I talked to one company spending $1.5 million a year just to keep theirs running.\n\nBoth have the same fatal flaw. Even if they deliver answers, they don't automatically lead to action. You still have to go implement whatever you found manually.\n\nThe third approach is Terret Nexus. We build a Revenue Graph in 48 hours. From there you ask your question, get an immediate answer, and our revenue agents help you implement it automatically.\n\nSee how it works at Terret.ai"
-}
+  {
+    "id": "justin_post_001",
+    "author": "Justin Shriber",
+    "title_hint": "The difference between an answer and an outcome",
+    "platform": "LinkedIn",
+    "profile_url": "https://www.linkedin.com/in/justinshriber/",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_a-lot-of-revenue-teams-have-come-to-the-same-activity-7470124159961034752-GY-B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "status": "new",
+    "raw_text": "A lot of revenue teams have come to the same conclusion recently.\n\nWe've got all this data. Why don't we just use an LLM to get to the root cause of what's happening in our business?\n\nI understand the instinct. But MCP server integrations actually create more problems in an enterprise than they solve.\n\nFirst, there's the matter of security.\n\nEvery underlying data system has its own access controls. When you use an LLM to bypass those controls, you're creating security holes, giving people access to information they shouldn't be able to see.\n\nSecond, there's quantitative accuracy.\n\nLLMs are notoriously bad at running calculations. Ask one what your ARR was last quarter and every time you ask, it's going to come up with a different way to calculate the number. And if it's missing context, it's just going to make it up. You get inconsistent, inaccurate numbers every time.\n\nThird, performance at scale.\n\nAsking an LLM to run across multiple systems, thread all of them together, and then reason on top of it is an incredibly inefficient approach. It won't scale in an enterprise environment.\n\nThis is exactly why we built Terret Nexus.\n\nWe sit across all of your revenue-facing systems, aggregate the information, and interface with LLMs to give you fast, accurate answers to the questions that matter. And then we operationalize those answers.\n\nThat's the difference between an answer and an outcome."
+  },
+  {
+    "id": "justin_post_002",
+    "author": "Justin Shriber",
+    "title_hint": "Why CROs still cannot get to root cause",
+    "platform": "LinkedIn",
+    "profile_url": "https://www.linkedin.com/in/justinshriber/",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-are-still-frustrated-despite-years-activity-7469791171922546688-8I24?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "status": "new",
+    "raw_text": "CROs tell me, \"Justin, we've invested in every analytics platform.\" Now we're investing in AI. And we still can't get to the root cause of our biggest challenges.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThese aren't new questions. The difference is that now there's an expectation that AI can finally answer them.\n\nThe reason it hasn't comes down to data.\n\nNot a lack of it. There's more data in most organizations than ever before.\n\nThe problem is that it's scattered across systems that don't talk to each other like a puzzle whose pieces have been thrown all over a room.\n\nTerret Nexus puts the puzzle together."
+  },
+  {
+    "id": "justin_post_003",
+    "author": "Justin Shriber",
+    "title_hint": "Why CROs still cannot get real answers from their data",
+    "platform": "LinkedIn",
+    "profile_url": "https://www.linkedin.com/in/justinshriber/",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-cros-still-cant-get-real-answers-from-activity-7463603809320087552-VthC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "status": "new",
+    "raw_text": "CROs have spent the last decade investing in analytics platforms. Now AI.\n\nThey still can't answer their most basic questions.\n\nWhat's driving the drop in my forecast?\nWhat are my rainmakers doing that nobody else is?\nWhy do we keep losing to this competitor?\n\nThat's not a tools problem. The tools are fine.\n\nThe problem is that the data is like a puzzle whose pieces have been scattered all over a room.\n\nCRM over here. Call transcripts over there. Email threads, ERP data, product usage -- all in separate systems, none of them talking to each other.\n\nSo when a platform tries to answer a question, it's only working with what it can see. And what it can see is never the whole picture.\n\nThe CROs getting real answers right now didn't buy a better platform. They built a complete picture first.\n\nThat's what we do at Terret.ai."
+  },
+  {
+    "id": "justin_post_004",
+    "author": "Justin Shriber",
+    "title_hint": "Three ways revenue orgs try to solve the data problem",
+    "platform": "LinkedIn",
+    "profile_url": "https://www.linkedin.com/in/justinshriber/",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_there-are-three-ways-revenue-orgs-try-to-activity-7462164112999874560--iK3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-09",
+    "capture_method": "manual public capture",
+    "status": "new",
+    "raw_text": "There are three ways revenue orgs try to solve the data problem. Two of them are traps.\n\nThe first is human middleware. One person manually pulls data together every time a question comes up. It works until it doesn't, and it never scales.\n\nThe second is the revenue data lake. It takes months to build, $1M+ to maintain, and every new question means more systems work. I talked to one company spending $1.5 million a year just to keep theirs running.\n\nBoth have the same fatal flaw. Even if they deliver answers, they don't automatically lead to action. You still have to go implement whatever you found manually.\n\nThe third approach is Terret Nexus. We build a Revenue Graph in 48 hours. From there you ask your question, get an immediate answer, and our revenue agents help you implement it automatically.\n\nSee how it works at Terret.ai"
+  },
+  {
+    "id": "justin_post_005",
+    "author": "Justin Shriber",
+    "title_hint": "Why AI agents alone will not transform revenue organizations",
+    "platform": "LinkedIn",
+    "profile_url": "https://www.linkedin.com/in/justinshriber/",
+    "post_url": "https://www.linkedin.com/posts/justinshriber_why-ai-agents-alone-wont-transform-your-activity-7470501131618729986-hk36?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE-2LVEBp-fGLeURQAgJli6_0NQTBaRSGbE",
+    "date_captured": "2026-06-10",
+    "capture_method": "manual public capture",
+    "status": "new",
+    "raw_text": "AI agents are only as good as the instructions they're given. That's why they're not delivering the results most CROs expect.\n\nTo get agents to execute well, a human has to go in, analyze your systems, understand all the data, and design the optimal processes for agents to follow.\n\nIn an enterprise-scale organization, that's virtually impossible for any one person to do.\n\nThis is where a new concept comes in. One I call AI Architects.\n\nThese aren't humans. They're AI entities whose job is to do the root cause analysis and design the optimal systems that agents then execute.\n\nWhen you combine an Architect with an Agent, you get strategic capability coupled with operational capability.\n\nThat's what unlocks the results CROs have been waiting for."
+  }
 ]

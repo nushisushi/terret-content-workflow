@@ -10,11 +10,13 @@ tags:
   - RevOps
   - CRO
   - answer-to-action
+  - AI agents
 source_post_ids:
   - justin_post_001
   - justin_post_002
   - justin_post_003
   - justin_post_004
+  - justin_post_005
 ---
 
 # Why CROs Need More Than an LLM on Top of Their Revenue Data
@@ -71,7 +73,11 @@ Nexus is positioned as an answer-to-action revenue engine for teams that need ro
 
 The important shift is not just from dashboard to chatbot. It is from partial answers to operational action.
 
-In practice, that means the system should help revenue teams move from a question like “Why did forecast move?” to the underlying drivers, the affected deals, the relevant team behaviors, and the next steps required to respond.
+That also changes how revenue teams should think about agents. Agents are only useful if they are executing the right process. If the instructions are weak, incomplete, or based on partial analysis, automating the workflow only makes the wrong motion run faster.
+
+In Justin Shriber's framing, revenue AI needs an architecture layer before the agent layer. One layer diagnoses the revenue environment and designs the right workflow. The next layer executes the operational steps.
+
+In practice, that means the system should help revenue teams move from a question like â€œWhy did forecast move?â€ to the underlying drivers, the affected deals, the relevant team behaviors, the workflow that should run next, and the agents or alerts required to respond.
 
 ## Why This Matters for CROs and RevOps Leaders
 
@@ -89,7 +95,7 @@ Third, the output has to move toward action. A useful system should support aler
 
 Do not evaluate revenue AI only by the quality of the interface. A clean chat experience can still produce shallow answers if the system underneath it cannot see the full picture.
 
-The better question is whether the system can connect revenue data, explain root cause, and help the team act.
+The better question is whether the system can connect revenue data, explain root cause, and design the right workflow before agents execute.
 
 For CROs and RevOps leaders, that is the real dividing line. The next generation of revenue intelligence will not be defined by who can generate the most fluent answer. It will be defined by who can turn the right answer into the next right action.
 
@@ -100,4 +106,6 @@ For CROs and RevOps leaders, that is the real dividing line. The next generation
 - The source posts include anecdotal claims about revenue data lake cost and implementation burden. This draft avoids repeating specific dollar amounts.
 - The draft treats Terret positioning as brand framing, not independently verified proof.
 - The draft should be checked for similarity to Justin Shriber's LinkedIn posts before approval.
+- The new AI agents source post introduces AI Architect framing. Review whether that terminology should appear publicly or remain source/context framing.
+- The draft now treats agents as execution layers that need strong process design before they can produce reliable revenue outcomes.
 - Recommended reviewer decision: approve with light edits if product language matches approved Terret positioning.
