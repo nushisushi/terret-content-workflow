@@ -13,8 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 DRAFT_PATH = ROOT / "outputs" / "drafts" / "blog_draft_001.md"
 IDEA_BRIEF_PATH = ROOT / "outputs" / "idea_briefs" / "idea_brief_001.json"
+QUALITY_CHECK_PATH = ROOT / "outputs" / "quality_checks" / "quality_check_001.md"
 REVIEW_DECISION_DIR = ROOT / "outputs" / "review_decisions"
 REVIEW_DECISION_PATH = REVIEW_DECISION_DIR / "review_decision_001.json"
+
+
+def rel_path(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
 
 
 def read_text(path: Path) -> str:
@@ -59,8 +64,9 @@ def save_review_decision(
 
     decision_payload = {
         "draft_id": "blog_draft_001",
-        "draft_path": str(DRAFT_PATH.relative_to(ROOT)),
-        "idea_brief_path": str(IDEA_BRIEF_PATH.relative_to(ROOT)),
+        "draft_path": rel_path(DRAFT_PATH),
+        "idea_brief_path": rel_path(IDEA_BRIEF_PATH),
+        "quality_check_path": rel_path(QUALITY_CHECK_PATH),
         "title": frontmatter.get(
             "title",
             "Why CROs Need More Than an LLM on Top of Their Revenue Data",
@@ -134,7 +140,20 @@ def main() -> None:
         for note in idea_brief.get("human_review_notes", []):
             st.write(f"- {note}")
 
+    if QUALITY_CHECK_PATH.exists():
+        with st.expander("Automated quality check", expanded=False):
+            st.markdown(read_text(QUALITY_CHECK_PATH))
+    else:
+        st.info(
+            "No quality check file found yet. Run `python src/run_workflow.py` "
+            "to generate one before review."
+        )
+
     st.subheader("Draft Preview")
+    st.caption(
+        "Internal review notes are visible to the reviewer here, but "
+        "`src/publish.py` strips them before writing the public post."
+    )
 
     preview_tab, raw_tab = st.tabs(["Rendered preview", "Raw Markdown"])
 
@@ -176,7 +195,7 @@ def main() -> None:
             frontmatter=frontmatter,
         )
 
-        relative_path = decision_path.relative_to(ROOT)
+        relative_path = rel_path(decision_path)
 
         if decision == "approved":
             st.success(f"Approved. Review decision saved to {relative_path}.")
