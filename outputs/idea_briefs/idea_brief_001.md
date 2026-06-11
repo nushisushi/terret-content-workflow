@@ -8,6 +8,8 @@ Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
 
+Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
+
 ## Source Signal Summary
 
 - Revenue leaders have invested in analytics platforms and AI, but still struggle to answer root-cause questions about forecast risk, deal loss, competitor pressure, and rep performance.

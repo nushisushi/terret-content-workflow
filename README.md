@@ -4,6 +4,28 @@ This is my prototype for the Terret Agentic Workflow Intern take-home project. I
 
 I kept the system local and file-based on purpose. Instead of spending most of the time wiring up external services, I wanted the core loop to be easy to inspect: source posts come in, the system creates an idea brief and draft, a reviewer checks the work in Streamlit, the review decision is saved, and the publish script refuses to write the final post unless that decision says it is approved.
 
+## What Is Real vs. Simulated
+
+Real in this prototype:
+
+- Source post validation
+- Idea brief artifact
+- Blog draft artifact
+- Pre-review quality checklist
+- Reviewer notification artifact
+- Streamlit human review gate
+- Saved review decision JSON
+- Publish script that blocks unless approval exists
+- Structured Markdown output with title, slug, meta description, tags, author, source post IDs, and body
+
+Simulated or local for the prototype:
+
+- LinkedIn ingestion is manual public capture, not scraping or API ingestion
+- Generation is deterministic, with prompt files included as live-LLM extension points
+- Notification writes a local Markdown artifact unless a webhook URL is configured
+- Publishing writes to a CMS-style Markdown folder, not a live CMS
+- Reviewer identity is typed in the local app, not authenticated
+
 ## What It Does
 
 The local workflow is:
@@ -12,7 +34,7 @@ The local workflow is:
 source posts
 → idea brief
 → blog draft
-→ quality check
+→ pre-review quality checklist
 → review packet
 → reviewer notification
 → human review app
@@ -27,10 +49,19 @@ The current live example is a blog post titled:
 Why CROs Need More Than an LLM on Top of Their Revenue Data
 ```
 
-This project does not call a live LLM API, authenticate reviewers, or publish to a real CMS yet. I focused on proving the parts that matter most for the assignment: the content pipeline, the reviewer handoff, and the approval gate. For notification, the local version always writes a reviewer-ready Markdown message and can also send that same message through a webhook when `NOTIFICATION_WEBHOOK_URL` is configured.
-
+This version keeps the LLM call, reviewer authentication, and real CMS integration out of scope so the core workflow is easier to inspect. I focused on proving the parts that matter most for the assignment: the content pipeline, the reviewer handoff, and the approval gate. For notification, the local version always writes a reviewer-ready Markdown message and can also send that same message through a webhook when `NOTIFICATION_WEBHOOK_URL` is configured.
 
 ## How to Run It
+
+### Setup
+
+From the repo root, install dependencies:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+The project can run fully in local demo mode without API keys. A webhook URL is only needed if you want to test optional notification delivery.
 
 From the repo root, generate the idea brief, draft, quality check, review packet, and reviewer notification:
 
@@ -49,7 +80,9 @@ outputs/review_packets/review_packet_001.md
 outputs/notifications/notification_001.md
 ```
 
-The notification step has two modes. In the local demo, it writes a Markdown message that gives the reviewer everything they need: the draft title, source post IDs, draft path, review packet path, quality check path, checklist, and next step. If `NOTIFICATION_WEBHOOK_URL` is configured, `src/run_workflow.py` also tries to send that message through a webhook, such as Slack or another automation endpoint. The file is still saved either way, so the handoff can be inspected even if delivery is skipped or fails.
+The notification step has two modes. In the local demo, it writes a Markdown message that gives the reviewer everything they need: the draft title, source post IDs, draft path, review packet path, quality check path, checklist, and next step. The source post file also includes the original LinkedIn URLs, capture method, and raw captured text so the reviewer can trace the draft back to the source signal.
+
+If `NOTIFICATION_WEBHOOK_URL` is configured, `src/run_workflow.py` also tries to send that message through a webhook, such as Slack or another automation endpoint. The file is still saved either way, so the handoff can be inspected even if delivery is skipped or fails.
 
 
 Optional webhook configuration is documented in `.env.example`:
@@ -124,7 +157,7 @@ For the live walkthrough, I would show the loop in this order:
 9. Open `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the final structured published output.
 ```
 
-The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through an automated quality check, reviewer notification, human review, saved approval state, and a publish gate before it becomes public output.
+The main thing I would emphasize is that the system does not treat generation as the finish line. The draft has to pass through a deterministic pre-review quality checklist, reviewer notification, human review, saved approval state, and a publish gate before it becomes public output.
 
 ## Source Data and Context
 
@@ -157,6 +190,8 @@ prompts/quality_check_prompt.md
 ```
 
 The current workflow uses deterministic Python generation logic so the demo is stable and the outputs are easy to inspect. The prompt files show where a live Gemini or OpenAI call would fit later.
+
+I included these prompt files to show the intended agent boundaries even though the current demo uses deterministic generation. In a live LLM version, the idea-brief prompt would act as the strategy layer, the blog-generation prompt as the drafting layer, and the quality-check prompt as the pre-review evaluation layer.
 
 
 ## Human Review Gate
@@ -209,7 +244,7 @@ The biggest content risk is still claims review. The draft is based on public fo
 
 ## Future Improvements
 
-The next improvements would be turning the blocked-publish proof into an automated test, supporting multiple content batches, adding reviewer authentication, hardening webhook notification delivery with retries and delivery logs, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
+The next improvements would be turning the blocked-publish proof into an automated test, supporting multiple content batches, adding reviewer authentication, hardening webhook notification delivery with retries and delivery logs, moving the file-based state into a more explicit workflow/state-machine layer, connecting a live LLM behind the prompt files, and publishing to a deployed static site or real CMS.
 
 
 ## Project Structure

@@ -61,8 +61,6 @@ def load_source_posts(path: Path) -> list[dict[str, Any]]:
 
     seen_ids: set[str] = set()
 
-    seen_ids: set[str] = set()
-
     for index, post in enumerate(posts):
         if not isinstance(post, dict):
             raise ValueError(f"Post at index {index} must be a JSON object.")
@@ -250,6 +248,8 @@ def render_idea_brief_markdown(brief: dict[str, Any]) -> str:
 
 {", ".join(brief["source_post_ids"])}
 
+Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
+
 ## Source Signal Summary
 
 {source_summary}
@@ -372,6 +372,8 @@ A new Terret blog draft is ready for review.
 Title: {brief["working_title"]}
 
 Source posts used: {source_post_ids}
+
+Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
 
 Draft file: `{rel_path(blog_draft_path)}`
 

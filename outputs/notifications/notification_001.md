@@ -1,6 +1,6 @@
 # Notification: Blog Draft Ready for Review
 
-Generated at: 2026-06-11 12:27:06
+Generated at: 2026-06-11 12:36:46
 
 Hi Marketing Reviewer,
 
@@ -11,6 +11,8 @@ A new Terret blog draft is ready for review.
 Title: Why CROs Need More Than an LLM on Top of Their Revenue Data
 
 Source posts used: justin_post_001, justin_post_002, justin_post_003, justin_post_004, justin_post_005
+
+Source post details are available in `data/source_posts.json`, including original LinkedIn URLs, capture method, and raw captured text.
 
 Draft file: `outputs/drafts/blog_draft_001.md`
 
