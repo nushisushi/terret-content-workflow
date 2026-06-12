@@ -78,6 +78,10 @@ My main goal was to show how the control layer works in a content workflow.
 
 The prototype collects the source signal, prepares reviewer-facing materials, sends notifications, tracks approvals, and stops publishing if approval is missing. The draft moves through the system as a content artifact, but it cannot be published on its own.
 
+Local published blog preview:
+
+![Local published blog preview](screenshots/published_preview.png)
+
 ## Quick Demo
 
 From the repo root:
