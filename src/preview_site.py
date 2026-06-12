@@ -233,7 +233,7 @@ st.markdown(
     f"""
     <div class="site-nav">
         <div class="brand">{logo_html}<span>Terret</span></div>
-        <div class="nav-links">Revenue AI · Blog · Local Preview</div>
+        <div class="nav-links">Revenue AI · Blog · Published Preview</div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -246,7 +246,7 @@ if meta_description:
     st.markdown(f'<div class="dek">{meta_description}</div>', unsafe_allow_html=True)
 
 st.markdown(
-    f'<div class="byline">By {author} · {reading_time}</div>',
+    f'<div class="byline">Published by <strong>{author}</strong> · {reading_time}</div>',
     unsafe_allow_html=True,
 )
 
