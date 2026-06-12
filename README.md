@@ -212,6 +212,10 @@ These files show where a live LLM call would fit in a production version. The id
 
 The review app is the human-facing control layer. The publish script is the enforcement layer.
 
+Screenshot of the local review gate:
+
+![Streamlit review gate with approval controls](screenshots/review_gate.png)
+
 A draft existing on disk is not enough to publish. `src/publish.py` reads the saved review decision first and only publishes when the decision is approved and `publish_allowed` is true.
 
 Before creating the public post, the script checks the draft metadata and removes internal review notes.
