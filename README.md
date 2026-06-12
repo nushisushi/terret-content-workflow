@@ -236,13 +236,13 @@ The publish step is the main safeguard. The system does not treat a generated dr
 
 For this version, I wanted the demo to behave the same way every time I ran it. The idea brief, draft, and quality check are generated with deterministic logic so the walkthrough is easier to inspect and less likely to fail because of an unpredictable model response.
 
-I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer: traceability, review context, approval state, and safe publishing. I chose this approach because the highest-risk part of this scoped prototype is the workflow around the draft. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
+I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer: traceability, review context, approval state, and safe publishing.The biggest risk in this workflow is not about generating a draft one time. The real concern is whether the system keeps the source context clear, gives reviewers enough information to decide, saves the approval state, and blocks publication until someone approves it. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
 
-In a production version, I would replace deterministic components with live LLM calls using the prompt files in prompts/, captured source posts, and data/terret_context.md. I would retain safeguards such as structured outputs, required field checks, retries for invalid responses, and human review for drafts that appear uncertain or risky.
+In a production version, I would replace deterministic components with live LLM calls using the prompt files in `prompts/`, captured source posts, and `data/terret_context.md`. I would retain safeguards such as structured outputs, required-field checks, retries for malformed responses, source and claim review, and human review for drafts that appear uncertain or risky.
 
 ## What Still Breaks
 
-This is a local prototype, not a complete product. It doesn’t connect to a live LLM API, verify reviewer identity, publish to a real CMS, or handle more than one batch of content. Webhook delivery depends on a `.env` setting and doesn’t support retries, delivery logs, or alerts yet.
+This is a local prototype, not a complete product. It doesn’t connect to a live LLM API, verify reviewer identity, publish to a real CMS, or handle more than one batch of content. Webhook delivery depends on a `.env` setting and does not support retries, delivery logs, or alerts yet.
 
 Review state is saved in a local JSON file, so running the review app again can overwrite a previous decision. Source posts are added manually. The SEO, AEO, and GEO fields are included in the output, but they are not checked with an external SEO tool. The final result is a Markdown file in `site/posts/`, not a live website.
 
@@ -250,13 +250,14 @@ The main content risk is claims review. The sample draft comes from public found
 
 ## Future Improvements
 
+The first thing I would harden is workflow state: I would replace the single local JSON decision file with run IDs, idempotency checks, reviewer authentication, and durable state transitions so duplicate runs or overwritten decisions cannot publish the wrong artifact.
+
 Next, I would:
 
 * Turn the blocked-publish proof into an automated test
 * Support multiple content batches
-* Add reviewer authentication
 * Add webhook retries and delivery logs
-* Move file-based state into a clearer workflow/state-machine layer
+* Add workflow-state logging and observability
 * Replace the deterministic renderer with a live LLM call
 * Publish to a deployed static site or real CMS
 
