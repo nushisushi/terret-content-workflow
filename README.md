@@ -214,7 +214,7 @@ The review app is the human-facing control layer. The publish script is the enfo
 
 Screenshot of the local review gate:
 
-![Streamlit review gate with approval controls](screenshots/review_gate.png)
+![Streamlit review gate with approval controls](screenshots/review_gate_cropped.png)
 
 A draft existing on disk is not enough to publish. `src/publish.py` reads the saved review decision first and only publishes when the decision is approved and `publish_allowed` is true.
 
