@@ -17,13 +17,14 @@ Built and working locally:
 * Saved review decision JSON
 * Publish script that blocks unless approval exists
 * Structured Markdown output with title, slug, meta description, tags, author, source post IDs, and body
+* Local published-output preview that renders the approved Markdown as a blog page
 
 Scoped down for the demo:
 
 * LinkedIn ingestion is manual public capture, not scraping or API ingestion
 * Draft generation is deterministic, using a representative draft based on five captured Justin Shriber posts and Terret positioning
 * Notification writes a local Markdown artifact unless a webhook URL is configured
-* Publishing writes to a CMS-style Markdown folder, not a live CMS
+* Publishing writes to a CMS-style Markdown folder, with a local preview app instead of a live CMS
 * Reviewer identity is typed in the local app, not authenticated
 
 ## Workflow
@@ -111,6 +112,12 @@ Select-String -Path site\posts\why-cros-need-more-than-an-llm-on-revenue-data.md
 
 A clean result prints nothing.
 
+Optional local preview of the published blog output:
+
+```powershell
+python -m streamlit run src/preview_site.py --server.port 8502
+```
+
 ## Demo Script
 
 In the walkthrough, I would show the workflow in this order:
@@ -121,7 +128,7 @@ In the walkthrough, I would show the workflow in this order:
 4. `outputs/notifications/notification_001.md` and `outputs/review_packets/review_packet_001.md` to show what the marketing reviewer receives.
 5. `src/review_app.py` / Streamlit to show approve, request-edits, and reject decisions.
 6. `src/publish.py` to show that publishing fails closed unless approval exists.
-7. `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` to show the structured CMS-style output after approval.
+7. `site/posts/why-cros-need-more-than-an-llm-on-revenue-data.md` and `src/preview_site.py` to show the structured CMS-style output after approval and the local published blog preview.
 
 The most important behavior to demo is the negative path: a draft can exist, but publishing is blocked unless a human approval decision exists and `publish_allowed` is true.
 
@@ -148,6 +155,12 @@ python src/publish.py
 ```
 
 If approval is missing, rejected, or marked as request-edits, publishing will not proceed. Once approval is given, the script generates the final Markdown post.
+
+To view the approved output as a local blog page, run:
+
+```powershell
+python -m streamlit run src/preview_site.py --server.port 8502
+```
 
 The system does not treat generation as the finish line. Before becoming public, the draft has to pass through a quality checklist, reviewer notification, human review, saved approval state, and final publish check.
 
@@ -236,7 +249,7 @@ The publish step is the main safeguard. The system does not treat a generated dr
 
 For this version, I wanted the demo to behave the same way every time I ran it. The idea brief, draft, and quality check are generated with deterministic logic so the walkthrough is easier to inspect and less likely to fail because of an unpredictable model response.
 
-I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer: traceability, review context, approval state, and safe publishing.The biggest risk in this workflow is not about generating a draft one time. The real concern is whether the system keeps the source context clear, gives reviewers enough information to decide, saves the approval state, and blocks publication until someone approves it. It is important to keep the source context visible, give the reviewer enough information to decide, save the approval state, and prevent publication until approval is given.
+I treated live LLM generation as a replaceable synthesis component, so I focused this prototype on the more business-critical control layer: traceability, review context, approval state, and safe publishing. The biggest risk in this workflow is not generating a draft one time. The real concern is whether the system keeps source context clear, gives reviewers enough information to decide, saves the approval state, and blocks publication until someone approves it.
 
 In a production version, I would replace deterministic components with live LLM calls using the prompt files in `prompts/`, captured source posts, and `data/terret_context.md`. I would retain safeguards such as structured outputs, required-field checks, retries for malformed responses, source and claim review, and human review for drafts that appear uncertain or risky.
 
@@ -244,7 +257,7 @@ In a production version, I would replace deterministic components with live LLM 
 
 This is a local prototype, not a complete product. It doesn’t connect to a live LLM API, verify reviewer identity, publish to a real CMS, or handle more than one batch of content. Webhook delivery depends on a `.env` setting and does not support retries, delivery logs, or alerts yet.
 
-Review state is saved in a local JSON file, so running the review app again can overwrite a previous decision. Source posts are added manually. The SEO, AEO, and GEO fields are included in the output, but they are not checked with an external SEO tool. The final result is a Markdown file in `site/posts/`, not a live website.
+Review state is saved in a local JSON file, so running the review app again can overwrite a previous decision. Source posts are added manually. The SEO, AEO, and GEO fields are included in the output, but they are not checked with an external SEO tool. The final result is a Markdown file in `site/posts/` with a local Streamlit preview.
 
 The main content risk is claims review. The sample draft comes from public founder posts and Terret positioning notes. Before publishing anything outside the team, a marketing reviewer should check product language, evidence boundaries, source similarity, and claim strength.
 
@@ -277,6 +290,7 @@ terret-content-workflow/
     review_app.py
     publish.py
     send_notification.py
+    preview_site.py
   outputs/
     source_maps/
     idea_briefs/
@@ -289,6 +303,7 @@ terret-content-workflow/
     test_runs/
   site/
     posts/
+    terret_logo.png
   .env.example
   README.md
   requirements.txt
